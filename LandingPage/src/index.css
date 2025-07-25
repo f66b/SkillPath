@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', sans-serif;
+  }
+}
+
+@layer components {
+  .glassmorphism {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+  
+  .soft-shadow {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  }
+  
+  .hero-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  }
+  
+  .btn-primary {
+    @apply bg-emerald-custom text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-500 transition-all transform hover:scale-105 soft-shadow;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-emerald-custom text-emerald-custom px-8 py-4 rounded-full font-semibold text-lg hover:bg-emerald-custom hover:text-white transition-all;
+  }
+} 
