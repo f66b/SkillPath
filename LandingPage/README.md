@@ -74,7 +74,7 @@ LandingPage/
 
 ## 🖼️ Image Placement Instructions
 
-Place all images in the `images/` folder with these exact filenames:
+Place all images in the `public/images/` folder with these exact filenames:
 
 ### 1. **Hero Section**
 - **Filename:** `hero-learning.png`

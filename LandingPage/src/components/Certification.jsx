@@ -38,7 +38,7 @@ const Certification = () => {
           <div className="relative">
             <div className="bg-gradient-to-br from-emerald-50 to-mint/20 rounded-3xl soft-shadow overflow-hidden">
               <img 
-                src="images/certificate-tablet.png" 
+                src="/images/certificate-tablet.png" 
                 alt="Digital Certificate on Tablet" 
                 className="w-full h-96 lg:h-[500px] object-cover"
               />

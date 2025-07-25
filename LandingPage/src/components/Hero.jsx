@@ -35,7 +35,7 @@ const Hero = () => {
           <div className="relative">
             <div className="bg-white rounded-3xl soft-shadow overflow-hidden">
               <img 
-                src="images/hero-learning.png" 
+                src="/images/hero-learning.png" 
                 alt="AI-Guided Learning Platform" 
                 className="w-full h-96 lg:h-[500px] object-cover"
               />

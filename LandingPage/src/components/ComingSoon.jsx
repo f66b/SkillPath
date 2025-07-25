@@ -11,7 +11,7 @@ const ComingSoon = () => {
     <section className="py-20 bg-gradient-to-br from-emerald-50 via-mint/10 to-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <img 
-          src="images/learning-journey-map.png" 
+          src="/images/learning-journey-map.png" 
           alt="Learning Journey Map" 
           className="w-full h-full object-cover"
         />
