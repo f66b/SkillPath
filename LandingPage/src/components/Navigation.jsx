@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Navigation = () => {
+const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const scrollToSection = (sectionId) => {
@@ -24,24 +24,41 @@ const Navigation = () => {
           
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('courses')}
-              className="text-slate-text hover:text-emerald-custom transition-colors"
-            >
-              Courses
-            </button>
-            <button 
-              onClick={() => scrollToSection('how-it-works')}
-              className="text-slate-text hover:text-emerald-custom transition-colors"
-            >
-              How it Works
-            </button>
-            <a href="#" className="text-slate-text hover:text-emerald-custom transition-colors">
-              Sign In
-            </a>
-            <button className="bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors soft-shadow">
-              Get Started
-            </button>
+            {!showCourse ? (
+              <>
+                <button 
+                  onClick={() => scrollToSection('courses')}
+                  className="text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  Courses
+                </button>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')}
+                  className="text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  How it Works
+                </button>
+                <a href="#" className="text-slate-text hover:text-emerald-custom transition-colors">
+                  Sign In
+                </a>
+                <button 
+                  onClick={onStartCourse}
+                  className="bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors soft-shadow"
+                >
+                  Start Course
+                </button>
+              </>
+            ) : (
+              <>
+                <span className="text-slate-text font-medium">Productivity 101 Course</span>
+                <button 
+                  onClick={onBackToLanding}
+                  className="text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  Back to Landing
+                </button>
+              </>
+            )}
           </div>
           
           {/* Mobile Menu Button */}
@@ -60,24 +77,41 @@ const Navigation = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 space-y-4">
-            <button 
-              onClick={() => scrollToSection('courses')}
-              className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
-            >
-              Courses
-            </button>
-            <button 
-              onClick={() => scrollToSection('how-it-works')}
-              className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
-            >
-              How it Works
-            </button>
-            <a href="#" className="block text-slate-text hover:text-emerald-custom transition-colors">
-              Sign In
-            </a>
-            <button className="w-full bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors">
-              Get Started
-            </button>
+            {!showCourse ? (
+              <>
+                <button 
+                  onClick={() => scrollToSection('courses')}
+                  className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  Courses
+                </button>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')}
+                  className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  How it Works
+                </button>
+                <a href="#" className="block text-slate-text hover:text-emerald-custom transition-colors">
+                  Sign In
+                </a>
+                <button 
+                  onClick={onStartCourse}
+                  className="w-full bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors"
+                >
+                  Start Course
+                </button>
+              </>
+            ) : (
+              <>
+                <span className="block text-slate-text font-medium">Productivity 101 Course</span>
+                <button 
+                  onClick={onBackToLanding}
+                  className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                >
+                  Back to Landing
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InteractiveCourses = () => {
+const InteractiveCourses = ({ onStartCourse }) => {
   return (
     <section id="courses" className="py-20 bg-cool-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,7 +56,10 @@ const InteractiveCourses = () => {
           </div>
         </div>
         <div className="text-center mt-12">
-          <button className="btn-primary">
+          <button 
+            onClick={onStartCourse}
+            className="btn-primary"
+          >
             Browse Courses
           </button>
         </div>
