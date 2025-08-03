@@ -1370,6 +1370,12 @@ const PomodoroMasteryCourse = () => {
   }
 
   const nextLesson = (partId) => {
+    // Check if current lesson is completed before allowing progression
+    const currentLessonKey = `${partId}-${currentLesson}`
+    if (!completedLessons[currentLessonKey]) {
+      return // Don't allow progression if current lesson isn't completed
+    }
+    
     if (partId === currentPart && currentLesson < 10) {
       setCurrentLesson(currentLesson + 1)
     } else if (partId === currentPart && currentLesson === 10) {
@@ -1461,12 +1467,16 @@ const PomodoroMasteryCourse = () => {
       handleFinalQuizAnswer(partId, questionIndex, answerIndex)
     }
 
-    const submitQuiz = () => {
-      setShowResults(true)
-      setTimeout(() => onSubmit(partId), 2000)
+      const submitQuiz = () => {
+    // Only allow submission if all questions are answered
+    if (Object.keys(answers).length !== quiz.length) {
+      return
     }
+    setShowResults(true)
+    setTimeout(() => onSubmit(partId), 2000)
+  }
 
-    const allAnswered = Object.keys(answers).length === quiz.length
+  const allAnswered = Object.keys(answers).length === quiz.length
     const score = showResults ? calculateFinalQuizScore(partId) : 0
 
     return (
@@ -1533,6 +1543,11 @@ const PomodoroMasteryCourse = () => {
             >
               Submit Final Quiz
             </button>
+            {!allAnswered && (
+              <p className="text-amber-600 text-sm mt-2">
+                Please answer all {quiz.length} questions before submitting
+              </p>
+            )}
           </div>
         )}
 
@@ -1616,16 +1631,22 @@ const PomodoroMasteryCourse = () => {
                 />
               ))}
 
-              {currentPart === currentPart && currentLesson <= 10 && (
-                <div className="text-center mt-6">
-                  <button
-                    onClick={() => nextLesson(currentPart)}
-                    className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 font-medium"
-                  >
-                    {currentLesson === 10 ? 'Take Final Quiz' : 'Continue to Next Lesson'}
-                  </button>
+                        {currentPart === currentPart && currentLesson <= 10 && (
+            <div className="text-center mt-6">
+              {completedLessons[`${currentPart}-${currentLesson}`] ? (
+                <button
+                  onClick={() => nextLesson(currentPart)}
+                  className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 font-medium"
+                >
+                  {currentLesson === 10 ? 'Take Final Quiz' : 'Continue to Next Lesson'}
+                </button>
+              ) : (
+                <div className="text-amber-600 bg-amber-50 p-4 rounded-lg border border-amber-200">
+                  <p className="font-medium">Complete the quiz above to continue to the next lesson</p>
                 </div>
               )}
+            </div>
+          )}
             </div>
           ) : (
             <FinalQuizComponent
