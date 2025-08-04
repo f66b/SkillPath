@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { useWeb3 } from './Web3Context'
+import progressService from '../services/progressService'
 
 const ProgressContext = createContext()
 
@@ -23,16 +24,21 @@ export const ProgressProvider = ({ children }) => {
     }
   }, [account])
 
-  // Load progress from localStorage
+  // Load progress from JSON service
   const loadProgress = (walletAddress) => {
     try {
-      const stored = localStorage.getItem(`skillpath_progress_${walletAddress}`)
-      if (stored) {
-        const parsedProgress = JSON.parse(stored)
-        setProgress(parsedProgress)
+      const userProgress = progressService.getUserProgress(walletAddress)
+      if (userProgress && userProgress.courses) {
+        setProgress(userProgress.courses)
       } else {
         // Initialize empty progress for new wallet
         setProgress({
+          initiation: {
+            completedLessons: {},
+            partScores: {},
+            courseProgress: 0,
+            lastAccessed: Date.now()
+          },
           pomodoro: {
             completedLessons: {},
             partScores: {},
@@ -53,7 +59,7 @@ export const ProgressProvider = ({ children }) => {
     }
   }
 
-  // Save progress to localStorage
+  // Save progress using JSON service
   const saveProgress = (walletAddress, courseType, newProgress) => {
     try {
       const updatedProgress = {
@@ -65,7 +71,7 @@ export const ProgressProvider = ({ children }) => {
       }
       
       setProgress(updatedProgress)
-      localStorage.setItem(`skillpath_progress_${walletAddress}`, JSON.stringify(updatedProgress))
+      progressService.updateUserProgress(walletAddress, courseType, newProgress)
     } catch (error) {
       console.error('Error saving progress:', error)
     }
@@ -75,6 +81,10 @@ export const ProgressProvider = ({ children }) => {
   const markLessonComplete = (courseType, partId, lessonId) => {
     if (!account) return
 
+    // Use the service to mark lesson complete
+    progressService.markLessonComplete(account, courseType, partId, lessonId)
+    
+    // Update local state
     const courseProgress = progress[courseType] || {
       completedLessons: {},
       partScores: {},
@@ -103,6 +113,9 @@ export const ProgressProvider = ({ children }) => {
   const updatePartScore = (courseType, partId, score) => {
     if (!account) return
 
+    // Use the service to update part score
+    progressService.updatePartScore(account, courseType, partId, score)
+
     const courseProgress = progress[courseType] || {
       completedLessons: {},
       partScores: {},
@@ -122,6 +135,9 @@ export const ProgressProvider = ({ children }) => {
 
   // Get course progress
   const getCourseProgress = (courseType) => {
+    if (account) {
+      return progressService.getCourseProgress(account, courseType)
+    }
     return progress[courseType] || {
       completedLessons: {},
       partScores: {},
@@ -131,51 +147,32 @@ export const ProgressProvider = ({ children }) => {
 
   // Check if lesson is completed
   const isLessonCompleted = (courseType, partId, lessonId) => {
+    if (account) {
+      return progressService.isLessonCompleted(account, courseType, partId, lessonId)
+    }
     const courseProgress = getCourseProgress(courseType)
     return courseProgress.completedLessons[`${partId}-${lessonId}`] || false
   }
 
   // Get part score
   const getPartScore = (courseType, partId) => {
+    if (account) {
+      return progressService.getPartScore(account, courseType, partId)
+    }
     const courseProgress = getCourseProgress(courseType)
     return courseProgress.partScores[partId] || 0
   }
 
   // Get total lessons for a course (this would need to be updated based on actual course data)
   const getTotalLessons = (courseType) => {
-    // This should match the actual number of lessons in your courses
-    const courseData = {
-      pomodoro: 50, // 5 parts * 10 lessons
-      htmlcss: 50   // 5 parts * 10 lessons
-    }
-    return courseData[courseType] || 0
+    return progressService.getTotalLessons(courseType)
   }
 
   // Get overall statistics
   const getStatistics = () => {
     if (!account) return {}
-
-    const pomodoroProgress = getCourseProgress('pomodoro')
-    const htmlcssProgress = getCourseProgress('htmlcss')
-
-    const totalLessonsCompleted = 
-      Object.keys(pomodoroProgress.completedLessons).length +
-      Object.keys(htmlcssProgress.completedLessons).length
-
-    const totalQuizzesPassed = 
-      Object.values(pomodoroProgress.partScores).filter(score => score >= 60).length +
-      Object.values(htmlcssProgress.partScores).filter(score => score >= 60).length
-
-    const totalCertificates = 
-      (pomodoroProgress.courseProgress === 100 ? 1 : 0) +
-      (htmlcssProgress.courseProgress === 100 ? 1 : 0)
-
-    return {
-      lessonsCompleted: totalLessonsCompleted,
-      quizzesPassed: totalQuizzesPassed,
-      certificatesEarned: totalCertificates,
-      hoursStudied: Math.round(totalLessonsCompleted * 0.5) // Estimate 30 minutes per lesson
-    }
+    
+    return progressService.getUserStatistics(account)
   }
 
   // Export progress data
@@ -183,14 +180,10 @@ export const ProgressProvider = ({ children }) => {
     if (!account) return null
 
     try {
-      const data = {
-        walletAddress: account,
-        progress: progress,
-        statistics: getStatistics(),
-        exportedAt: new Date().toISOString()
-      }
+      const exportData = progressService.exportUserProgress(account)
+      if (!exportData) return null
       
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
@@ -235,7 +228,9 @@ export const ProgressProvider = ({ children }) => {
 
     if (window.confirm('Are you sure you want to clear all progress? This action cannot be undone.')) {
       setProgress({})
-      localStorage.removeItem(`skillpath_progress_${account}`)
+      // Note: In a real application, you would call an API to clear the data
+      // For now, we'll just clear the local state
+      console.log('Progress cleared for wallet:', account)
     }
   }
 

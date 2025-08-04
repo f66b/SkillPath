@@ -30,6 +30,14 @@ const InitiationCourse = () => {
     }
   }, [account, getCourseProgress])
 
+  // Update progress display when progress changes
+  useEffect(() => {
+    if (account) {
+      const progress = getCourseProgress('initiation')
+      setCourseProgress(progress.courseProgress || 0)
+    }
+  }, [progress, account, getCourseProgress])
+
   const handleFinalQuizAnswer = (partId, questionIndex, selectedAnswer) => {
     setFinalQuizAnswers(prev => ({
       ...prev,

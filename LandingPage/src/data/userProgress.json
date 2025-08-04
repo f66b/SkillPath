@@ -1,0 +1,39 @@
+{
+  "users": {
+    "0x0000000000000000000000000000000000000000": {
+      "walletAddress": "0x0000000000000000000000000000000000000000",
+      "lastUpdated": "2024-01-01T00:00:00.000Z",
+      "courses": {
+        "initiation": {
+          "completedLessons": {},
+          "partScores": {},
+          "courseProgress": 0,
+          "lastAccessed": "2024-01-01T00:00:00.000Z"
+        },
+        "pomodoro": {
+          "completedLessons": {},
+          "partScores": {},
+          "courseProgress": 0,
+          "lastAccessed": "2024-01-01T00:00:00.000Z"
+        },
+        "htmlcss": {
+          "completedLessons": {},
+          "partScores": {},
+          "courseProgress": 0,
+          "lastAccessed": "2024-01-01T00:00:00.000Z"
+        }
+      },
+      "statistics": {
+        "lessonsCompleted": 0,
+        "quizzesPassed": 0,
+        "certificatesEarned": 0,
+        "hoursStudied": 0
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "lastBackup": "2024-01-01T00:00:00.000Z",
+    "totalUsers": 1
+  }
+} 
