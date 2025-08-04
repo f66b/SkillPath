@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { Web3Context } from '../context/Web3Context';
-import { ProgressContext } from '../context/ProgressContext';
+import { useWeb3 } from '../context/Web3Context';
+import { useProgress } from '../context/ProgressContext';
 
 // Contract ABI (you'll need to import this from your compiled contract)
 const CONTRACT_ABI = [
@@ -15,8 +15,8 @@ const CONTRACT_ABI = [
 ];
 
 const TrophySystem = () => {
-  const { account, provider } = useContext(Web3Context);
-  const { userProgress } = useContext(ProgressContext);
+  const { account, provider } = useWeb3();
+  const { progress } = useProgress();
   
   const [contract, setContract] = useState(null);
   const [userTrophies, setUserTrophies] = useState([]);
@@ -39,7 +39,7 @@ const TrophySystem = () => {
       loadUserTrophies();
       loadAvailableTrophies();
     }
-  }, [contract, account, userProgress]);
+  }, [contract, account, progress]);
 
   const initializeContract = async () => {
     try {
@@ -89,13 +89,15 @@ const TrophySystem = () => {
       const available = [];
       
       // Check each course in user progress
-      for (const course of userProgress.courses || []) {
-        if (course.completed) {
-          const hasClaimed = await contract.hasUserClaimed(course.id, account);
+      const courseIds = ['initiation', 'pomodoro', 'htmlcss'];
+      for (const courseId of courseIds) {
+        const courseProgress = progress[courseId];
+        if (courseProgress && courseProgress.courseProgress >= 100) {
+          const hasClaimed = await contract.hasUserClaimed(courseId, account);
           if (!hasClaimed) {
-            const courseInfo = await contract.courses(course.id);
+            const courseInfo = await contract.courses(courseId);
             available.push({
-              courseId: course.id,
+              courseId: courseId,
               courseName: courseInfo.name,
               courseDescription: courseInfo.description,
               imageUri: courseInfo.imageUri
