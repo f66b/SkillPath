@@ -88,6 +88,15 @@ const InitiationCourse = () => {
     return Math.min(completedCount + 1, lessons.length)
   }
 
+  const getCurrentLesson = (partId) => {
+    const lessons = courseData[partId].lessons
+    const completedCount = lessons.filter(lesson => 
+      isLessonCompleted('initiation', partId, lesson.id)
+    ).length
+    
+    return Math.min(completedCount + 1, lessons.length)
+  }
+
   const nextLesson = (partId) => {
     const lessonsToShow = getLessonsToShow(partId)
     if (currentLesson < lessonsToShow) {
@@ -310,23 +319,32 @@ const InitiationCourse = () => {
             />
           ) : (
             <div>
-              {courseData[currentPart].lessons
-                .slice(0, getLessonsToShow(currentPart))
-                .map(lesson => (
-                  <LessonComponent
-                    key={lesson.id}
-                    lesson={lesson}
-                    partId={currentPart}
-                    onComplete={() => {
-                      markLessonComplete('initiation', currentPart, lesson.id)
-                      if (lesson.id === getLessonsToShow(currentPart)) {
-                        nextLesson(currentPart)
-                      }
-                    }}
-                  />
-                ))}
+              {(() => {
+                const currentLessonNumber = getCurrentLesson(currentPart)
+                const currentLesson = courseData[currentPart].lessons.find(lesson => lesson.id === currentLessonNumber)
+                
+                if (currentLesson) {
+                  return (
+                    <LessonComponent
+                      key={currentLesson.id}
+                      lesson={currentLesson}
+                      partId={currentPart}
+                      onComplete={() => {
+                        markLessonComplete('initiation', currentPart, currentLesson.id)
+                        // Move to next lesson or show final quiz
+                        if (currentLessonNumber === courseData[currentPart].lessons.length) {
+                          setShowFinalQuiz(true)
+                        } else {
+                          setCurrentLesson(currentLessonNumber + 1)
+                        }
+                      }}
+                    />
+                  )
+                }
+                return null
+              })()}
               
-              {getLessonsToShow(currentPart) < courseData[currentPart].lessons.length && (
+              {getCurrentLesson(currentPart) < courseData[currentPart].lessons.length && (
                 <div className="text-center mt-6">
                   <p className="text-gray-600 mb-4">
                     Complete the current lesson to continue your journey
