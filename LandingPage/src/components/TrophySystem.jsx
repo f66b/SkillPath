@@ -1,80 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
 import { useProgress } from '../context/ProgressContext';
 
-// Contract ABI (you'll need to import this from your compiled contract)
-const CONTRACT_ABI = [
-  "function claimTrophy(uint256 courseId) external",
-  "function hasUserClaimed(uint256 courseId, address user) external view returns (bool)",
-  "function getUserTrophies(address user) external view returns (uint256[])",
-  "function getTrophyMetadata(uint256 tokenId) external view returns (tuple(uint256 courseId, address userAddress, uint256 dateClaimed, string courseName))",
-  "function tokenURI(uint256 tokenId) external view returns (string)",
-  "function courses(uint256 courseId) external view returns (tuple(string name, string description, string imageUri, bool exists))",
-  "function totalSupply() external view returns (uint256)"
-];
-
 const TrophySystem = () => {
-  const { account, provider } = useWeb3();
-  const { progress } = useProgress();
+  const { account } = useWeb3();
+  const { progress, getCourseProgress } = useProgress();
   
-  const [contract, setContract] = useState(null);
   const [userTrophies, setUserTrophies] = useState([]);
   const [availableTrophies, setAvailableTrophies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [claiming, setClaiming] = useState({});
 
-  // Contract address - replace with your deployed contract address
-  const CONTRACT_ADDRESS = process.env.REACT_APP_TROPHY_CONTRACT_ADDRESS || "0x...";
-
-  useEffect(() => {
-    if (provider && account) {
-      initializeContract();
+  // Mock contract data for demonstration
+  const mockCourses = {
+    1: {
+      name: "Welcome to SkillPath",
+      description: "Get started with this simple initiation course to learn how the platform works",
+      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash1"
+    },
+    2: {
+      name: "Pomodoro Mastery Course",
+      description: "Master time management and productivity with the proven Pomodoro Technique",
+      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash2"
+    },
+    3: {
+      name: "HTML & CSS Basics",
+      description: "Build your first web page from scratch! Learn HTML structure, CSS styling, and responsive design",
+      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash3"
     }
-  }, [provider, account]);
+  };
+
+  // Course ID mapping
+  const courseIdMapping = {
+    'initiation': 1,
+    'pomodoro': 2,
+    'htmlcss': 3
+  };
 
   useEffect(() => {
-    if (contract && account) {
+    if (account) {
       loadUserTrophies();
       loadAvailableTrophies();
     }
-  }, [contract, account, progress]);
-
-  const initializeContract = async () => {
-    try {
-      const signer = await provider.getSigner();
-      const contractInstance = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-      setContract(contractInstance);
-    } catch (error) {
-      console.error('Error initializing contract:', error);
-      setError('Failed to connect to trophy contract');
-    }
-  };
+  }, [account, progress]);
 
   const loadUserTrophies = async () => {
     try {
       setLoading(true);
-      const tokenIds = await contract.getUserTrophies(account);
-      const trophies = [];
-
-      for (const tokenId of tokenIds) {
-        const metadata = await contract.getTrophyMetadata(tokenId);
-        const tokenUri = await contract.tokenURI(tokenId);
-        
-        // Parse the base64 metadata
-        const jsonData = JSON.parse(atob(tokenUri.replace('data:application/json;base64,', '')));
-        
-        trophies.push({
-          tokenId: tokenId.toString(),
-          courseId: metadata.courseId.toString(),
-          courseName: metadata.courseName,
-          dateClaimed: new Date(metadata.dateClaimed * 1000).toISOString(),
-          userAddress: metadata.userAddress,
-          metadata: jsonData
-        });
-      }
-
+      // Load claimed trophies from localStorage
+      const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
+      const trophies = JSON.parse(claimedTrophies);
+      
       setUserTrophies(trophies.sort((a, b) => new Date(b.dateClaimed) - new Date(a.dateClaimed)));
     } catch (error) {
       console.error('Error loading user trophies:', error);
@@ -91,13 +68,20 @@ const TrophySystem = () => {
       // Check each course in user progress
       const courseIds = ['initiation', 'pomodoro', 'htmlcss'];
       for (const courseId of courseIds) {
-        const courseProgress = progress[courseId];
+        const courseProgress = getCourseProgress(courseId);
+        console.log(`Course ${courseId} progress:`, courseProgress);
+        
+        // Check if course is completed (100% progress)
         if (courseProgress && courseProgress.courseProgress >= 100) {
-          const hasClaimed = await contract.hasUserClaimed(courseId, account);
+          // Check if trophy already claimed
+          const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
+          const trophies = JSON.parse(claimedTrophies);
+          const hasClaimed = trophies.some(trophy => trophy.courseId === courseIdMapping[courseId]);
+          
           if (!hasClaimed) {
-            const courseInfo = await contract.courses(courseId);
+            const courseInfo = mockCourses[courseIdMapping[courseId]];
             available.push({
-              courseId: courseId,
+              courseId: courseIdMapping[courseId],
               courseName: courseInfo.name,
               courseDescription: courseInfo.description,
               imageUri: courseInfo.imageUri
@@ -106,6 +90,7 @@ const TrophySystem = () => {
         }
       }
       
+      console.log('Available trophies:', available);
       setAvailableTrophies(available);
     } catch (error) {
       console.error('Error loading available trophies:', error);
@@ -117,8 +102,31 @@ const TrophySystem = () => {
       setClaiming(prev => ({ ...prev, [courseId]: true }));
       setError(null);
 
-      const tx = await contract.claimTrophy(courseId);
-      await tx.wait();
+      // Create trophy data
+      const courseInfo = mockCourses[courseId];
+      const trophy = {
+        tokenId: Date.now().toString(),
+        courseId: courseId,
+        courseName: courseInfo.name,
+        dateClaimed: new Date().toISOString(),
+        userAddress: account,
+        metadata: {
+          name: `SkillPath Trophy - ${courseInfo.name}`,
+          description: `Awarded to ${account} for completing the ${courseInfo.name} course on SkillPath.`,
+          image: courseInfo.imageUri,
+          attributes: [
+            { trait_type: "Course ID", value: courseId.toString() },
+            { trait_type: "Date Claimed", value: new Date().toISOString() },
+            { trait_type: "Non-Transferable", value: "true" }
+          ]
+        }
+      };
+
+      // Save to localStorage
+      const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
+      const trophies = JSON.parse(claimedTrophies);
+      trophies.push(trophy);
+      localStorage.setItem(`skillpath_trophies_${account}`, JSON.stringify(trophies));
 
       // Reload trophies after successful claim
       await loadUserTrophies();
@@ -255,16 +263,11 @@ const TrophySystem = () => {
                         <span className="text-green-600 font-semibold">Soulbound</span>
                       </div>
                     </div>
-                    <div className="mt-4 pt-4 border-t border-gray-200">
-                      <a
-                        href={`https://polygonscan.com/token/${CONTRACT_ADDRESS}?a=${trophy.tokenId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                      >
-                        View on PolygonScan →
-                      </a>
-                    </div>
+                                         <div className="mt-4 pt-4 border-t border-gray-200">
+                       <span className="text-green-600 text-sm font-medium">
+                         ✅ Trophy Claimed
+                       </span>
+                     </div>
                   </div>
                 </div>
               ))}
