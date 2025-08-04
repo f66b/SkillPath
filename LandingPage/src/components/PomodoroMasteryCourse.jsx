@@ -1385,11 +1385,10 @@ const PomodoroMasteryCourse = () => {
 
   const LessonComponent = ({ lesson, partId, onComplete }) => {
     const [selectedAnswer, setSelectedAnswer] = useState(null)
-    const [showResult, setShowResult] = useState(false)
     const isCompleted = completedLessons[`${partId}-${lesson.id}`]
 
-    const handleQuizSubmit = () => {
-      setShowResult(true)
+    const handleAnswerSelect = (answerIndex) => {
+      setSelectedAnswer(answerIndex)
       if (!isCompleted) {
         onComplete(partId, lesson.id)
       }
@@ -1417,32 +1416,44 @@ const PomodoroMasteryCourse = () => {
           <p className="text-gray-700 mb-4">{lesson.quiz.question}</p>
           
           <div className="space-y-2 mb-4">
-            {lesson.quiz.options.map((option, index) => (
-              <label key={index} className="flex items-center space-x-3 cursor-pointer">
-                <input
-                  type="radio"
-                  name={`lesson-${partId}-${lesson.id}`}
-                  value={index}
-                  checked={selectedAnswer === index}
-                  onChange={(e) => setSelectedAnswer(parseInt(e.target.value))}
-                  className="text-emerald-600"
-                />
-                <span className="text-gray-700">{String.fromCharCode(65 + index)}) {option}</span>
-              </label>
-            ))}
+            {lesson.quiz.options.map((option, index) => {
+              const isSelected = selectedAnswer === index
+              const isCorrect = index === lesson.quiz.correct
+              const showResult = selectedAnswer !== null
+              
+              return (
+                <label 
+                  key={index} 
+                  className={`flex items-center space-x-3 cursor-pointer p-2 rounded transition-colors ${
+                    showResult
+                      ? isCorrect
+                        ? 'bg-green-100 border border-green-300'
+                        : isSelected && !isCorrect
+                        ? 'bg-red-100 border border-red-300'
+                        : ''
+                      : isSelected
+                      ? 'bg-blue-50 border border-blue-300'
+                      : 'hover:bg-gray-50'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`lesson-${partId}-${lesson.id}`}
+                    value={index}
+                    checked={isSelected}
+                    onChange={() => handleAnswerSelect(index)}
+                    className="text-emerald-600"
+                  />
+                  <span className="text-gray-700">
+                    {String.fromCharCode(65 + index)}) {option}
+                    {showResult && isCorrect && ' ✓'}
+                  </span>
+                </label>
+              )
+            })}
           </div>
 
-          {!showResult && (
-            <button
-              onClick={handleQuizSubmit}
-              disabled={selectedAnswer === null}
-              className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
-            >
-              Submit Answer
-            </button>
-          )}
-
-          {showResult && (
+          {selectedAnswer !== null && (
             <div className={`p-4 rounded-lg ${selectedAnswer === lesson.quiz.correct ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
               <p className={`font-medium ${selectedAnswer === lesson.quiz.correct ? 'text-green-800' : 'text-red-800'}`}>
                 {selectedAnswer === lesson.quiz.correct ? '✓ Correct!' : '✗ Incorrect'}
@@ -1464,7 +1475,8 @@ const PomodoroMasteryCourse = () => {
 
     const handleAnswerChange = (questionIndex, answerIndex) => {
       setAnswers(prev => ({ ...prev, [questionIndex]: answerIndex }))
-      handleFinalQuizAnswer(partId, questionIndex, answerIndex)
+      // Update the parent component's state as well
+      setFinalQuizAnswers(prev => ({ ...prev, [`${partId}-${questionIndex}`]: answerIndex }))
     }
 
       const submitQuiz = () => {
