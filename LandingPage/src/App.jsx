@@ -22,14 +22,20 @@ function App() {
   // Handle URL changes for dashboard routing
   useEffect(() => {
     const path = window.location.pathname
+    console.log('Current path:', path)
+    console.log('Setting currentView based on path:', path)
+    
     if (path === '/dashboard') {
+      console.log('Setting view to dashboard')
       setCurrentView('dashboard')
       setShowCourse(false)
       setSelectedCourse(null)
-    } else if (path === '/course') {
+    } else if (path === '/course' || path === '/courses') {
+      console.log('Setting view to course selection')
       setCurrentView('course')
       setShowCourse(true)
     } else {
+      console.log('Setting view to landing')
       setCurrentView('landing')
       setShowCourse(false)
       setSelectedCourse(null)
@@ -39,7 +45,7 @@ function App() {
   const startCourse = () => {
     setShowCourse(true)
     setCurrentView('course')
-    window.history.pushState({}, '', '/course')
+    window.history.pushState({}, '', '/courses')
   }
 
   const backToLanding = () => {
@@ -68,7 +74,7 @@ function App() {
         setCurrentView('dashboard')
         setShowCourse(false)
         setSelectedCourse(null)
-      } else if (path === '/course') {
+      } else if (path === '/course' || path === '/courses') {
         setCurrentView('course')
         setShowCourse(true)
       } else {
@@ -83,6 +89,7 @@ function App() {
   }, [])
 
   // Dashboard view
+  console.log('Rendering with currentView:', currentView, 'selectedCourse:', selectedCourse)
   if (currentView === 'dashboard') {
     return (
       <Web3Provider>
