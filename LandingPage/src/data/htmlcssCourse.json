@@ -1,0 +1,259 @@
+{
+  "1": {
+    "title": "Introduction to HTML & CSS",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "What is HTML?",
+        "content": "HTML (HyperText Markup Language) is the standard markup language used to create web pages. It provides the structure and content of a webpage by using tags to define different elements like headings, paragraphs, images, and links. Think of HTML as the skeleton that gives a webpage its basic form and organization.",
+        "quiz": {
+          "question": "What does HTML stand for?",
+          "options": [
+            "High Tech Modern Language",
+            "HyperText Markup Language",
+            "Home Tool Markup Language",
+            "Hyperlink and Text Markup Language"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 2,
+        "title": "What is CSS?",
+        "content": "CSS (Cascading Style Sheets) is a styling language that controls the visual appearance of HTML elements. It allows you to change colors, fonts, spacing, layout, and other design aspects of your web pages. CSS works alongside HTML to transform plain content into beautifully styled websites.",
+        "quiz": {
+          "question": "What is the primary purpose of CSS?",
+          "options": [
+            "To create the structure of web pages",
+            "To control the visual appearance and styling",
+            "To add functionality to web pages",
+            "To store data on web pages"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 3,
+        "title": "How the Web Works",
+        "content": "When you visit a website, your browser sends a request to a web server, which responds with HTML and CSS files. The browser then interprets these files to display the webpage. HTML provides the content structure, while CSS determines how that content looks and is arranged on the screen.",
+        "quiz": {
+          "question": "What happens when you visit a website?",
+          "options": [
+            "The website downloads to your computer permanently",
+            "Your browser requests files from a server and displays them",
+            "The website creates new files on your computer",
+            "Nothing happens until you click a link"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 4,
+        "title": "HTML Elements and Tags",
+        "content": "HTML elements are the building blocks of web pages, defined by tags. Tags come in pairs: opening tags like `<p>` and closing tags like `</p>`. The content between these tags becomes the element. Some elements, like images, use self-closing tags that don't need a closing tag.",
+        "quiz": {
+          "question": "What are HTML elements defined by?",
+          "options": [
+            "CSS rules",
+            "JavaScript code",
+            "Tags",
+            "File names"
+          ],
+          "correct": 2
+        }
+      },
+      {
+        "id": 5,
+        "title": "HTML Attributes",
+        "content": "Attributes provide additional information about HTML elements and are placed inside the opening tag. Common attributes include 'id' for unique identification, 'class' for grouping elements, and 'src' for specifying image sources. Attributes help make elements more specific and functional.",
+        "quiz": {
+          "question": "Where are HTML attributes placed?",
+          "options": [
+            "In the closing tag",
+            "Inside the opening tag",
+            "Between the opening and closing tags",
+            "Outside the element"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 6,
+        "title": "Basic CSS Syntax",
+        "content": "CSS uses a simple syntax: selectors target HTML elements, and declaration blocks contain property-value pairs that define styles. For example, `p { color: blue; }` makes all paragraph text blue. CSS rules can target elements by tag name, class, or ID.",
+        "quiz": {
+          "question": "What does the CSS rule 'p { color: blue; }' do?",
+          "options": [
+            "Makes all text blue",
+            "Makes all paragraph text blue",
+            "Makes the background blue",
+            "Creates a blue border"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 7,
+        "title": "CSS Selectors",
+        "content": "CSS selectors determine which HTML elements will be styled. Tag selectors target elements by name (like 'p' for paragraphs), class selectors use a dot (like '.highlight'), and ID selectors use a hash (like '#header'). Selectors help you apply styles to specific elements.",
+        "quiz": {
+          "question": "Which selector targets elements with a specific class?",
+          "options": [
+            "Tag selector (p)",
+            "Class selector (.classname)",
+            "ID selector (#idname)",
+            "Universal selector (*)"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 8,
+        "title": "CSS Properties and Values",
+        "content": "CSS properties define what aspect of an element to style, while values specify how to style it. Common properties include 'color' for text color, 'font-size' for text size, and 'background-color' for background color. Values can be keywords, numbers, or specific units.",
+        "quiz": {
+          "question": "What do CSS properties define?",
+          "options": [
+            "The HTML element to target",
+            "What aspect of an element to style",
+            "The file name",
+            "The browser to use"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 9,
+        "title": "Inline vs External CSS",
+        "content": "CSS can be written inline within HTML tags, internally in the head section, or externally in separate files. External CSS files are preferred because they keep styling separate from content, making websites easier to maintain and allowing styles to be reused across multiple pages.",
+        "quiz": {
+          "question": "Why are external CSS files preferred?",
+          "options": [
+            "They load faster",
+            "They keep styling separate from content",
+            "They use less memory",
+            "They work in all browsers"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 10,
+        "title": "Your First HTML Page",
+        "content": "Every HTML page needs a basic structure with DOCTYPE declaration, html, head, and body tags. The head contains metadata like the page title, while the body contains the visible content. This structure provides the foundation for all web pages and ensures proper rendering by browsers.",
+        "quiz": {
+          "question": "Which section contains the visible content of a webpage?",
+          "options": [
+            "The head section",
+            "The body section",
+            "The title section",
+            "The meta section"
+          ],
+          "correct": 1
+        }
+      }
+    ],
+    "finalQuiz": [
+      {
+        "question": "What does HTML stand for?",
+        "options": [
+          "High Tech Modern Language",
+          "HyperText Markup Language",
+          "Home Tool Markup Language",
+          "Hyperlink and Text Markup Language"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is the primary purpose of CSS?",
+        "options": [
+          "To create the structure of web pages",
+          "To control the visual appearance and styling",
+          "To add functionality to web pages",
+          "To store data on web pages"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What are HTML elements defined by?",
+        "options": [
+          "CSS rules",
+          "JavaScript code",
+          "Tags",
+          "File names"
+        ],
+        "correct": 2
+      },
+      {
+        "question": "Where are HTML attributes placed?",
+        "options": [
+          "In the closing tag",
+          "Inside the opening tag",
+          "Between the opening and closing tags",
+          "Outside the element"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What does the CSS rule 'p { color: blue; }' do?",
+        "options": [
+          "Makes all text blue",
+          "Makes all paragraph text blue",
+          "Makes the background blue",
+          "Creates a blue border"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Which selector targets elements with a specific class?",
+        "options": [
+          "Tag selector (p)",
+          "Class selector (.classname)",
+          "ID selector (#idname)",
+          "Universal selector (*)"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What do CSS properties define?",
+        "options": [
+          "The HTML element to target",
+          "What aspect of an element to style",
+          "The file name",
+          "The browser to use"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Why are external CSS files preferred?",
+        "options": [
+          "They load faster",
+          "They keep styling separate from content",
+          "They use less memory",
+          "They work in all browsers"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Which section contains the visible content of a webpage?",
+        "options": [
+          "The head section",
+          "The body section",
+          "The title section",
+          "The meta section"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What happens when you visit a website?",
+        "options": [
+          "The website downloads to your computer permanently",
+          "Your browser requests files from a server and displays them",
+          "The website creates new files on your computer",
+          "Nothing happens until you click a link"
+        ],
+        "correct": 1
+      }
+    ]
+  }
+} 

@@ -1,0 +1,1031 @@
+{
+  "1": {
+    "title": "Introduction to Time Blocking",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "What is Time Blocking?",
+        "content": "Time blocking is a productivity method where you divide your day into specific time slots, assigning each slot to a particular task or activity. Unlike traditional to-do lists, time blocking creates a visual schedule that helps you stay focused and accountable. This approach transforms abstract tasks into concrete, scheduled commitments.",
+        "quiz": {
+          "question": "What is the main difference between time blocking and traditional to-do lists?",
+          "options": [
+            "Time blocking is faster to create",
+            "Time blocking creates a visual schedule with specific time slots",
+            "To-do lists are more detailed",
+            "Time blocking requires no planning"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 2,
+        "title": "The Psychology Behind Time Blocking",
+        "content": "Time blocking works because it leverages psychological principles like Parkinson's Law and the planning fallacy. When you assign specific time frames to tasks, you naturally work more efficiently to complete them within the allocated time. This method also reduces decision fatigue by eliminating constant choices about what to work on next.",
+        "quiz": {
+          "question": "Which psychological principle helps explain why time blocking is effective?",
+          "options": [
+            "The halo effect",
+            "Parkinson's Law",
+            "Confirmation bias",
+            "The anchoring effect"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 3,
+        "title": "Benefits of Time Blocking",
+        "content": "Time blocking reduces mental fatigue by removing guesswork from your day. When your schedule is clearly defined, you're less likely to procrastinate or multitask. This structured approach creates momentum, improves focus, and provides a clear sense of progress throughout your day.",
+        "quiz": {
+          "question": "What is one of the key benefits of time blocking?",
+          "options": [
+            "It allows multitasking",
+            "It increases guesswork",
+            "It creates structured focus and reduces procrastination",
+            "It eliminates the need for a schedule"
+          ],
+          "correct": 2
+        }
+      },
+      {
+        "id": 4,
+        "title": "Common Time Blocking Mistakes",
+        "content": "Many beginners make the mistake of over-planning their days, leaving no buffer time for unexpected interruptions. Another common error is creating unrealistic time estimates for tasks. The key is to start with broader time blocks and gradually refine your estimates as you learn your natural work rhythms.",
+        "quiz": {
+          "question": "What is a common mistake beginners make with time blocking?",
+          "options": [
+            "Under-planning their days",
+            "Over-planning without buffer time",
+            "Using too much buffer time",
+            "Not planning at all"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 5,
+        "title": "Digital vs. Analog Time Blocking",
+        "content": "You can practice time blocking using digital calendars, apps, or traditional paper planners. Digital tools offer convenience, reminders, and easy editing, while analog methods provide tactile satisfaction and fewer distractions. Choose the method that feels most natural and sustainable for your lifestyle.",
+        "quiz": {
+          "question": "What advantage do analog time blocking methods offer?",
+          "options": [
+            "Automatic reminders",
+            "Easy editing and syncing",
+            "Tactile satisfaction and fewer distractions",
+            "Cloud backup"
+          ],
+          "correct": 2
+        }
+      },
+      {
+        "id": 6,
+        "title": "Setting Realistic Time Estimates",
+        "content": "Accurate time estimation is crucial for effective time blocking. Start by tracking how long tasks actually take you, then add 25% buffer time to account for interruptions and complexity. Remember that cognitive tasks often take longer than we initially estimate, especially when they require deep focus.",
+        "quiz": {
+          "question": "How much buffer time should you typically add to your initial task estimates?",
+          "options": [
+            "10%",
+            "25%",
+            "50%",
+            "75%"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 7,
+        "title": "Creating Buffer Time",
+        "content": "Buffer time is essential for handling unexpected interruptions, urgent emails, or tasks that run longer than expected. Plan for 15-30 minute buffers between major tasks, and consider scheduling 'catch-up' blocks during your day. This prevents your entire schedule from derailing when something unexpected occurs.",
+        "quiz": {
+          "question": "Why is buffer time important in time blocking?",
+          "options": [
+            "To fill empty spaces in your calendar",
+            "To handle unexpected interruptions and overruns",
+            "To make your schedule look busier",
+            "To reduce the number of tasks"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 8,
+        "title": "Energy-Based Time Blocking",
+        "content": "Your energy levels fluctuate throughout the day, so align your most demanding tasks with your peak energy periods. For most people, cognitive work is best done in the morning when mental clarity is highest. Reserve routine tasks for periods when your energy naturally dips.",
+        "quiz": {
+          "question": "When should you typically schedule your most demanding cognitive tasks?",
+          "options": [
+            "Late at night",
+            "During lunch breaks",
+            "During your peak energy periods",
+            "When you're tired"
+          ],
+          "correct": 2
+        }
+      },
+      {
+        "id": 9,
+        "title": "Theme Days and Time Blocking",
+        "content": "Theme days involve dedicating entire days or large portions of days to similar types of work. For example, 'Marketing Monday' or 'Writing Wednesday.' This approach reduces context switching and allows you to dive deeper into specific types of work, maximizing both efficiency and quality.",
+        "quiz": {
+          "question": "What is the main benefit of using theme days?",
+          "options": [
+            "It makes scheduling more complex",
+            "It reduces context switching and allows deeper focus",
+            "It requires more planning time",
+            "It eliminates the need for time blocking"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 10,
+        "title": "Starting Your Time Blocking Journey",
+        "content": "Begin with just one week of time blocking to test the waters. Start by blocking out your most important tasks first, then fill in the supporting activities. Don't aim for perfection—focus on building the habit and adjusting your approach based on what you learn about your work patterns.",
+        "quiz": {
+          "question": "How should beginners start their time blocking journey?",
+          "options": [
+            "Plan out an entire month perfectly",
+            "Start with one week and focus on building the habit",
+            "Block every minute of every day",
+            "Only use it for work tasks"
+          ],
+          "correct": 1
+        }
+      }
+    ],
+    "finalQuiz": [
+      {
+        "question": "What does time blocking primarily help with?",
+        "options": [
+          "Prioritizing Netflix shows",
+          "Multitasking more effectively", 
+          "Reducing distractions and improving focus",
+          "Avoiding planning altogether"
+        ],
+        "correct": 2
+      },
+      {
+        "question": "According to Parkinson's Law, how does time blocking affect productivity?",
+        "options": [
+          "Work expands to fill the time available",
+          "Work contracts when given specific time limits",
+          "Time has no effect on productivity",
+          "More time always equals better results"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is a major mistake beginners make with time blocking?",
+        "options": [
+          "Planning too little",
+          "Over-planning without buffer time",
+          "Using digital tools",
+          "Starting on Monday"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How much buffer time should you add to task estimates?",
+        "options": [
+          "10%",
+          "25%",
+          "50%",
+          "No buffer needed"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "When should you schedule your most demanding cognitive work?",
+        "options": [
+          "When you're tired",
+          "During your peak energy periods",
+          "Late at night",
+          "During lunch"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is the benefit of theme days?",
+        "options": [
+          "More complexity",
+          "Reduces context switching",
+          "Requires more planning",
+          "Eliminates time blocking"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Which tool is commonly used to block time visually?",
+        "options": [
+          "Email",
+          "Calendar",
+          "Notes app",
+          "Stopwatch"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What should you do when tasks consistently run over their time blocks?",
+        "options": [
+          "Give up time blocking",
+          "Adjust your time estimates and add more buffer",
+          "Work faster",
+          "Skip the overrunning tasks"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Why does time blocking reduce decision fatigue?",
+        "options": [
+          "It eliminates all decisions",
+          "It reduces constant choices about what to work on next",
+          "It makes decisions for you",
+          "It increases available choices"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How should beginners approach their first week of time blocking?",
+        "options": [
+          "Plan every minute perfectly",
+          "Focus on building the habit and learning",
+          "Only plan work tasks",
+          "Avoid any flexibility"
+        ],
+        "correct": 1
+      }
+    ]
+  },
+  "2": {
+    "title": "What is the Pomodoro Technique?",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Origins of the Pomodoro Technique",
+        "content": "The Pomodoro Technique was developed by Francesco Cirillo in the late 1980s. As a university student, Cirillo struggled with focus and procrastination. He used a tomato-shaped kitchen timer (pomodoro is Italian for tomato) to break his work into focused intervals. This simple tool became the foundation of a productivity method used by millions worldwide.",
+        "quiz": {
+          "question": "Who created the Pomodoro Technique?",
+          "options": [
+            "David Allen",
+            "Francesco Cirillo", 
+            "Stephen Covey",
+            "Tim Ferriss"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 2,
+        "title": "The Basic 25-Minute Rule",
+        "content": "The traditional Pomodoro Technique uses 25-minute focused work sessions followed by 5-minute breaks. This timing isn't arbitrary—research shows that most people can maintain intense focus for about 20-30 minutes before attention begins to wane. The 25-minute interval hits the sweet spot of sustained concentration without mental fatigue.",
+        "quiz": {
+          "question": "How long is a traditional Pomodoro work session?",
+          "options": [
+            "20 minutes",
+            "25 minutes",
+            "30 minutes", 
+            "45 minutes"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 3,
+        "title": "The Science Behind 25 Minutes",
+        "content": "The 25-minute duration is based on cognitive science research about attention spans and mental fatigue. Studies show that most people can maintain focused attention for about 20-30 minutes before experiencing diminishing returns. The Pomodoro Technique leverages this natural rhythm to maximize productivity while preventing burnout.",
+        "quiz": {
+          "question": "What does cognitive science say about attention spans?",
+          "options": [
+            "Everyone can focus for hours",
+            "Most people can focus for 20-30 minutes",
+            "Attention spans are unlimited",
+            "Shorter sessions are always better"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 4,
+        "title": "The Break Structure",
+        "content": "Pomodoro breaks are just as important as work sessions. Short 5-minute breaks allow your brain to rest and recharge, while longer 15-30 minute breaks after 4 Pomodoros provide deeper recovery. These breaks prevent mental fatigue and help maintain consistent performance throughout the day.",
+        "quiz": {
+          "question": "How long is a short Pomodoro break?",
+          "options": [
+            "2 minutes",
+            "5 minutes",
+            "10 minutes",
+            "15 minutes"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 5,
+        "title": "Why Pomodoros Work",
+        "content": "Pomodoros work because they create a sense of urgency and commitment. When you start a timer, you're making a promise to focus for a specific period. The time constraint eliminates procrastination and creates momentum. The regular breaks prevent burnout and maintain your energy levels.",
+        "quiz": {
+          "question": "What does the timer create in Pomodoro sessions?",
+          "options": [
+            "More stress",
+            "A sense of urgency and commitment",
+            "Longer work hours",
+            "More distractions"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 6,
+        "title": "Pomodoro vs. Traditional Work",
+        "content": "Traditional work often involves long, unstructured sessions that lead to diminishing focus and productivity. Pomodoros provide structure, clear boundaries, and regular recovery periods. This approach typically results in higher quality work and better mental health compared to marathon work sessions.",
+        "quiz": {
+          "question": "How do Pomodoros compare to traditional work sessions?",
+          "options": [
+            "They take longer",
+            "They provide structure and regular breaks",
+            "They require more equipment",
+            "They are less effective"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 7,
+          "title": "The Four-Pomodoro Rule",
+          "content": "After completing four Pomodoros, take a longer break of 15-30 minutes. This extended break allows your brain to fully recover and process what you've learned. It also helps prevent the mental fatigue that can accumulate during extended work periods.",
+          "quiz": {
+            "question": "What should you do after four Pomodoros?",
+            "options": [
+              "Work harder",
+              "Take a longer break of 15-30 minutes",
+              "Switch to a different task",
+              "End your work day"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 8,
+          "title": "Pomodoro Variations",
+          "content": "While 25 minutes is standard, you can adjust Pomodoro length based on your needs. Some people prefer 20-minute sessions for lighter tasks, while others use 45-minute sessions for deep work. The key is finding the duration that works best for your attention span and task type.",
+          "quiz": {
+            "question": "Can you adjust Pomodoro length?",
+            "options": [
+              "No, it must always be 25 minutes",
+              "Yes, based on your needs and task type",
+              "Only for breaks, not work sessions",
+              "Only on weekends"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 9,
+          "title": "Common Pomodoro Mistakes",
+          "content": "Common mistakes include skipping breaks, working through the timer, and not tracking completed Pomodoros. Breaks are essential for the technique to work effectively. Working through the timer defeats the purpose and can lead to burnout. Tracking helps you measure progress and stay motivated.",
+          "quiz": {
+            "question": "What is a common Pomodoro mistake?",
+            "options": [
+              "Taking breaks",
+              "Skipping breaks",
+              "Using a timer",
+              "Tracking progress"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 10,
+          "title": "Getting Started with Pomodoros",
+          "content": "Start with just one or two Pomodoros per day to build the habit. Choose simple, well-defined tasks for your first sessions. Use any timer—phone, computer, or kitchen timer. Focus on completing the full session without interruption, then gradually increase your daily Pomodoro count.",
+          "quiz": {
+            "question": "How should beginners start with Pomodoros?",
+            "options": [
+              "Start with 10 Pomodoros per day",
+              "Start with 1-2 Pomodoros per day",
+              "Skip the timer entirely",
+              "Only use them on weekends"
+            ],
+            "correct": 1
+          }
+        }
+      ],
+      "finalQuiz": [
+        {
+          "question": "Who created the Pomodoro Technique?",
+          "options": [
+            "David Allen",
+            "Francesco Cirillo",
+            "Stephen Covey",
+            "Tim Ferriss"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How long is a traditional Pomodoro work session?",
+          "options": [
+            "20 minutes",
+            "25 minutes",
+            "30 minutes",
+            "45 minutes"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What does cognitive science say about attention spans?",
+          "options": [
+            "Everyone can focus for hours",
+            "Most people can focus for 20-30 minutes",
+            "Attention spans are unlimited",
+            "Shorter sessions are always better"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How long is a short Pomodoro break?",
+          "options": [
+            "2 minutes",
+            "5 minutes",
+            "10 minutes",
+            "15 minutes"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What does the timer create in Pomodoro sessions?",
+          "options": [
+            "More stress",
+            "A sense of urgency and commitment",
+            "Longer work hours",
+            "More distractions"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How do Pomodoros compare to traditional work sessions?",
+          "options": [
+            "They take longer",
+            "They provide structure and regular breaks",
+            "They require more equipment",
+            "They are less effective"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What should you do after four Pomodoros?",
+          "options": [
+            "Work harder",
+            "Take a longer break of 15-30 minutes",
+            "Switch to a different task",
+            "End your work day"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Can you adjust Pomodoro length?",
+          "options": [
+            "No, it must always be 25 minutes",
+            "Yes, based on your needs and task type",
+            "Only for breaks, not work sessions",
+            "Only on weekends"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is a common Pomodoro mistake?",
+          "options": [
+            "Taking breaks",
+            "Skipping breaks",
+            "Using a timer",
+            "Tracking progress"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How should beginners start with Pomodoros?",
+          "options": [
+            "Start with 10 Pomodoros per day",
+            "Start with 1-2 Pomodoros per day",
+            "Skip the timer entirely",
+            "Only use them on weekends"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    "3": {
+      "title": "Combining Time Blocking and Pomodoros",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "The Perfect Combination",
+          "content": "Time blocking and Pomodoros work together beautifully. Use time blocking to plan your day and allocate time for different types of work, then use Pomodoros to execute those time blocks with focused intensity. This combination provides both structure and focus, maximizing your productivity.",
+          "quiz": {
+            "question": "How do time blocking and Pomodoros work together?",
+            "options": [
+              "They cancel each other out",
+              "Time blocking plans, Pomodoros execute",
+              "You must choose one or the other",
+              "They require different tools"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 2,
+          "title": "Planning Your Day with Both Methods",
+          "content": "Start by time blocking your day into major categories: deep work, meetings, admin tasks, and breaks. Within your deep work blocks, plan to use Pomodoros. For example, a 2-hour deep work block might contain 4 Pomodoros with breaks. This creates a structured yet flexible approach to your day.",
+          "quiz": {
+            "question": "How should you structure a deep work time block?",
+            "options": [
+              "Fill it with meetings",
+              "Plan to use Pomodoros within it",
+              "Leave it completely empty",
+              "Only use it for breaks"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 3,
+          "title": "Adapting Pomodoros to Different Tasks",
+          "content": "Not all tasks require the same Pomodoro approach. Use standard 25-minute Pomodoros for focused work like writing or coding. Use shorter 15-minute Pomodoros for lighter tasks like email or admin work. For very complex tasks, consider longer 45-minute sessions with extended breaks.",
+          "quiz": {
+            "question": "What Pomodoro length works best for focused work?",
+            "options": [
+              "15 minutes",
+              "25 minutes",
+              "45 minutes",
+              "60 minutes"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 4,
+          "title": "Handling Interruptions",
+          "content": "When interruptions occur during a Pomodoro, you have three options: deal with it immediately if urgent, note it down and continue, or abandon the Pomodoro and start over. The key is having a clear strategy for handling interruptions so they don't derail your entire system.",
+          "quiz": {
+            "question": "What should you do with urgent interruptions during a Pomodoro?",
+            "options": [
+              "Always ignore them",
+              "Deal with them immediately if urgent",
+              "Never break a Pomodoro",
+              "Wait until the next break"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 5,
+          "title": "Tracking and Measuring Progress",
+          "content": "Track both your time blocks and completed Pomodoros to measure your productivity. Note which combinations work best for different types of work. Over time, you'll develop patterns that maximize your efficiency and help you estimate task duration more accurately.",
+          "quiz": {
+            "question": "Why should you track both time blocks and Pomodoros?",
+            "options": [
+              "To impress your boss",
+              "To measure productivity and find optimal patterns",
+              "To waste time",
+              "To make work more complicated"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 6,
+          "title": "The Weekly Review Process",
+          "content": "At the end of each week, review your time blocks and Pomodoro completion rates. Identify what worked well and what needs adjustment. Use this information to refine your approach for the following week. This continuous improvement process helps you optimize your productivity system.",
+          "quiz": {
+            "question": "When should you review your productivity system?",
+            "options": [
+              "Never",
+              "At the end of each week",
+              "Only when things go wrong",
+              "Once per year"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 7,
+          "title": "Scaling Your System",
+          "content": "As you become comfortable with the combination, you can scale it to handle more complex projects and longer time periods. Use time blocking for weekly and monthly planning, then break down those blocks into daily Pomodoro sessions. This creates a comprehensive productivity system.",
+          "quiz": {
+            "question": "How can you scale your productivity system?",
+            "options": [
+              "By making it more complicated",
+              "By using time blocking for longer periods and Pomodoros for daily execution",
+              "By adding more tools",
+              "By working longer hours"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 8,
+          "title": "Team Implementation",
+          "content": "When working with teams, coordinate your time blocks and Pomodoro sessions. Schedule meetings during designated time blocks, and respect each other's Pomodoro sessions. This creates a culture of focused work and reduces unnecessary interruptions.",
+          "quiz": {
+            "question": "How should teams handle Pomodoro sessions?",
+            "options": [
+              "Ignore them completely",
+              "Respect each other's Pomodoro sessions",
+              "Schedule meetings during them",
+              "Make them optional"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 9,
+          "title": "Overcoming Common Challenges",
+          "content": "Common challenges include over-scheduling, rigid adherence to the system, and not accounting for energy fluctuations. Be flexible and adjust your approach based on your energy levels and the nature of your work. The system should serve you, not control you.",
+          "quiz": {
+            "question": "What should you do when the system feels too rigid?",
+            "options": [
+              "Give up entirely",
+              "Be flexible and adjust based on your needs",
+              "Work harder",
+              "Ignore the system"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 10,
+          "title": "Building Long-term Habits",
+          "content": "Consistency is key to making this system work long-term. Start small, be patient with yourself, and focus on building the habit rather than achieving perfection. Over time, the combination of time blocking and Pomodoros will become second nature and significantly improve your productivity.",
+          "quiz": {
+            "question": "What is most important for long-term success?",
+            "options": [
+              "Perfection from day one",
+              "Consistency and building habits",
+              "Using expensive tools",
+              "Working longer hours"
+            ],
+            "correct": 1
+          }
+        }
+      ],
+      "finalQuiz": [
+        {
+          "question": "How do time blocking and Pomodoros work together?",
+          "options": [
+            "They cancel each other out",
+            "Time blocking plans, Pomodoros execute",
+            "You must choose one or the other",
+            "They require different tools"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How should you structure a deep work time block?",
+          "options": [
+            "Fill it with meetings",
+            "Plan to use Pomodoros within it",
+            "Leave it completely empty",
+            "Only use it for breaks"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What Pomodoro length works best for focused work?",
+          "options": [
+            "15 minutes",
+            "25 minutes",
+            "45 minutes",
+            "60 minutes"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What should you do with urgent interruptions during a Pomodoro?",
+          "options": [
+            "Always ignore them",
+            "Deal with them immediately if urgent",
+            "Never break a Pomodoro",
+            "Wait until the next break"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Why should you track both time blocks and Pomodoros?",
+          "options": [
+            "To impress your boss",
+            "To measure productivity and find optimal patterns",
+            "To waste time",
+            "To make work more complicated"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "When should you review your productivity system?",
+          "options": [
+            "Never",
+            "At the end of each week",
+            "Only when things go wrong",
+            "Once per year"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How can you scale your productivity system?",
+          "options": [
+            "By making it more complicated",
+            "By using time blocking for longer periods and Pomodoros for daily execution",
+            "By adding more tools",
+            "By working longer hours"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How should teams handle Pomodoro sessions?",
+          "options": [
+            "Ignore them completely",
+            "Respect each other's Pomodoro sessions",
+            "Schedule meetings during them",
+            "Make them optional"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What should you do when the system feels too rigid?",
+          "options": [
+            "Give up entirely",
+            "Be flexible and adjust based on your needs",
+            "Work harder",
+            "Ignore the system"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is most important for long-term success?",
+          "options": [
+            "Perfection from day one",
+            "Consistency and building habits",
+            "Using expensive tools",
+            "Working longer hours"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    "4": {
+      "title": "Advanced Techniques and Tools",
+      "lessons": [
+        {
+          "id": 1,
+          "title": "Digital Tools for Time Blocking",
+          "content": "Modern digital tools can enhance your time blocking practice. Calendar apps like Google Calendar, project management tools like Notion, and specialized apps like Sunsama can help you plan, track, and optimize your time blocks. Choose tools that integrate well with your existing workflow.",
+          "quiz": {
+            "question": "What should you consider when choosing digital tools?",
+            "options": [
+              "Only the price",
+              "How well they integrate with your workflow",
+              "How many features they have",
+              "How popular they are"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 2,
+          "title": "Pomodoro Apps and Timers",
+          "content": "Dedicated Pomodoro apps offer features like automatic break timers, session tracking, and statistics. Popular options include Forest, Focus@Will, and the classic Tomato Timer. Many of these apps also include features to block distracting websites and track your productivity patterns.",
+          "quiz": {
+            "question": "What features do Pomodoro apps typically offer?",
+            "options": [
+              "Only basic timers",
+              "Automatic break timers, session tracking, and statistics",
+              "Social media integration",
+              "Video games"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 3,
+          "title": "Integrating with Calendar Systems",
+          "content": "Sync your time blocks with your calendar system to avoid conflicts and ensure others can see your availability. Many calendar apps allow you to set up recurring time blocks and automatically adjust for meetings and other commitments. This creates a single source of truth for your schedule.",
+          "quiz": {
+            "question": "Why sync time blocks with your calendar?",
+            "options": [
+              "To make it more complicated",
+              "To avoid conflicts and show availability",
+              "To waste time",
+              "To impress colleagues"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 4,
+          "title": "Analytics and Insights",
+          "content": "Use analytics to understand your productivity patterns. Track metrics like completed Pomodoros, time block adherence, and task completion rates. This data helps you identify your most productive times, common interruptions, and areas for improvement.",
+          "quiz": {
+            "question": "What can analytics help you understand?",
+            "options": [
+              "Only your salary",
+              "Your productivity patterns and areas for improvement",
+              "Your social media usage",
+              "Your sleep schedule"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 5,
+          "title": "Automation and Workflows",
+          "content": "Automate repetitive aspects of your productivity system. Set up recurring time blocks, automatic Pomodoro timers, and automated tracking. This reduces the mental overhead of managing your system and helps you focus on the actual work.",
+          "quiz": {
+            "question": "What should you automate in your productivity system?",
+            "options": [
+              "All decision making",
+              "Repetitive aspects like recurring time blocks",
+              "Creative work",
+              "Meetings"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 6,
+          "title": "Mobile Productivity",
+          "content": "Maintain your productivity system on mobile devices. Use mobile apps for time blocking and Pomodoros when away from your desk. Many apps sync across devices, ensuring your system works seamlessly whether you're at home, in the office, or traveling.",
+          "quiz": {
+            "question": "How should you handle mobile productivity?",
+            "options": [
+              "Ignore it completely",
+              "Use mobile apps that sync across devices",
+              "Only work on desktop",
+              "Use different systems for mobile"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 7,
+          "title": "Collaborative Time Blocking",
+          "content": "When working with teams, use collaborative time blocking tools. Share your time blocks with colleagues, coordinate meeting times, and respect each other's focused work periods. This creates a culture of productivity and reduces unnecessary interruptions.",
+          "quiz": {
+            "question": "What is collaborative time blocking?",
+            "options": [
+              "Working on the same task",
+              "Sharing time blocks and coordinating with colleagues",
+              "Using the same tools",
+              "Having the same schedule"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 8,
+          "title": "Customizing Your System",
+          "content": "Adapt your productivity system to your unique needs and preferences. Experiment with different time block lengths, Pomodoro durations, and break structures. The best system is one that works for you and fits your natural work rhythms.",
+          "quiz": {
+            "question": "What is the best productivity system?",
+            "options": [
+              "The most popular one",
+              "One that works for you and fits your rhythms",
+              "The most expensive one",
+              "The simplest one"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 9,
+          "title": "Troubleshooting Common Issues",
+          "content": "Common issues include over-scheduling, tool overwhelm, and system abandonment. If you're struggling, simplify your approach, focus on the basics, and gradually add complexity. Remember that consistency is more important than perfection.",
+          "quiz": {
+            "question": "What should you do if your system feels overwhelming?",
+            "options": [
+              "Give up entirely",
+              "Simplify and focus on the basics",
+              "Add more tools",
+              "Work harder"
+            ],
+            "correct": 1
+          }
+        },
+        {
+          "id": 10,
+          "title": "Future-Proofing Your System",
+          "content": "As your work and life change, be prepared to adapt your productivity system. Regularly evaluate what's working and what needs adjustment. Stay open to new tools and techniques while maintaining the core principles that work for you.",
+          "quiz": {
+            "question": "How should you handle changes in your work or life?",
+            "options": [
+              "Never change your system",
+              "Adapt your system as needed",
+              "Start over completely",
+              "Ignore the changes"
+            ],
+            "correct": 1
+          }
+        }
+      ],
+      "finalQuiz": [
+        {
+          "question": "What should you consider when choosing digital tools?",
+          "options": [
+            "Only the price",
+            "How well they integrate with your workflow",
+            "How many features they have",
+            "How popular they are"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What features do Pomodoro apps typically offer?",
+          "options": [
+            "Only basic timers",
+            "Automatic break timers, session tracking, and statistics",
+            "Social media integration",
+            "Video games"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Why sync time blocks with your calendar?",
+          "options": [
+            "To make it more complicated",
+            "To avoid conflicts and show availability",
+            "To waste time",
+            "To impress colleagues"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What can analytics help you understand?",
+          "options": [
+            "Only your salary",
+            "Your productivity patterns and areas for improvement",
+            "Your social media usage",
+            "Your sleep schedule"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What should you automate in your productivity system?",
+          "options": [
+            "All decision making",
+            "Repetitive aspects like recurring time blocks",
+            "Creative work",
+            "Meetings"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How should you handle mobile productivity?",
+          "options": [
+            "Ignore it completely",
+            "Use mobile apps that sync across devices",
+            "Only work on desktop",
+            "Use different systems for mobile"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is collaborative time blocking?",
+          "options": [
+            "Working on the same task",
+            "Sharing time blocks and coordinating with colleagues",
+            "Using the same tools",
+            "Having the same schedule"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What is the best productivity system?",
+          "options": [
+            "The most popular one",
+            "One that works for you and fits your rhythms",
+            "The most expensive one",
+            "The simplest one"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "What should you do if your system feels overwhelming?",
+          "options": [
+            "Give up entirely",
+            "Simplify and focus on the basics",
+            "Add more tools",
+            "Work harder"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "How should you handle changes in your work or life?",
+          "options": [
+            "Never change your system",
+            "Adapt your system as needed",
+            "Start over completely",
+            "Ignore the changes"
+          ],
+          "correct": 1
+        }
+      ]
+    }
+  }
+} 
