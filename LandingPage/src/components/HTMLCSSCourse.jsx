@@ -330,9 +330,23 @@ const HTMLCSSCourse = () => {
             <h3 className="text-xl font-semibold text-green-800 mb-2">
               🎉 Congratulations!
             </h3>
-            <p className="text-green-700">
+            <p className="text-green-700 mb-4">
               You've completed the HTML & CSS Basics course! You now have the skills to create beautiful, responsive websites.
             </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => window.location.href = '/dashboard'}
+                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Go to Dashboard
+              </button>
+              <button
+                onClick={() => window.location.href = '/'}
+                className="bg-white text-green-600 px-6 py-2 rounded-lg border-2 border-green-200 hover:bg-green-50 transition-colors"
+              >
+                Explore More Courses
+              </button>
+            </div>
           </div>
         )}
       </div>

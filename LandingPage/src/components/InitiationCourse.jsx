@@ -56,8 +56,12 @@ const InitiationCourse = () => {
     updatePartScore('initiation', partId, score)
     
     if (score >= 60) {
-      // Since this is a single-part course, show completion message
+      // Since this is a single-part course, redirect to dashboard
       setShowFinalQuiz(false)
+      // Redirect to dashboard after a short delay to show completion
+      setTimeout(() => {
+        window.location.href = '/dashboard'
+      }, 2000)
     }
   }
 
