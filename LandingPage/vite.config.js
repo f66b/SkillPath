@@ -13,5 +13,8 @@ export default defineConfig({
     assetsDir: 'assets',
     copyPublicDir: true
   },
-  publicDir: 'public'
+  publicDir: 'public',
+  json: {
+    stringify: true
+  }
 }) 
