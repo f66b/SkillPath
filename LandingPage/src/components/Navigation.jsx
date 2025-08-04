@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
+import { useWeb3 } from '../context/Web3Context'
 import WalletConnect from './WalletConnect'
 
-const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
+const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboard }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { account } = useWeb3()
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
+  const goToDashboard = () => {
+    if (onGoToDashboard) {
+      onGoToDashboard()
     }
     setIsMobileMenuOpen(false)
   }
@@ -39,6 +48,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
                 >
                   How it Works
                 </button>
+                {account && (
+                  <button 
+                    onClick={goToDashboard}
+                    className="text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    My Dashboard
+                  </button>
+                )}
                 <WalletConnect />
                 <button 
                   onClick={onStartCourse}
@@ -50,6 +67,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
             ) : (
               <>
                 <span className="text-slate-text font-medium">Productivity 101 Course</span>
+                {account && (
+                  <button 
+                    onClick={goToDashboard}
+                    className="text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    My Dashboard
+                  </button>
+                )}
                 <WalletConnect />
                 <button 
                   onClick={onBackToLanding}
@@ -92,6 +117,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
                 >
                   How it Works
                 </button>
+                {account && (
+                  <button 
+                    onClick={goToDashboard}
+                    className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    My Dashboard
+                  </button>
+                )}
                 <button 
                   onClick={onStartCourse}
                   className="w-full bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors"
@@ -102,6 +135,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
             ) : (
               <>
                 <span className="block text-slate-text font-medium">Productivity 101 Course</span>
+                {account && (
+                  <button 
+                    onClick={goToDashboard}
+                    className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    My Dashboard
+                  </button>
+                )}
                 <button 
                   onClick={onBackToLanding}
                   className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"

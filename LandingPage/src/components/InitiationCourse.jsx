@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useWeb3 } from '../context/Web3Context'
 import { useProgress } from '../context/ProgressContext'
-import pomodoroCourseData from '../data/pomodoroCourse.json'
+import initiationCourseData from '../data/initiationCourse.json'
 
-const PomodoroMasteryCourse = () => {
+const InitiationCourse = () => {
   const { account } = useWeb3()
   const { 
     getCourseProgress, 
@@ -20,12 +20,12 @@ const PomodoroMasteryCourse = () => {
   const [courseProgress, setCourseProgress] = useState(0)
 
   // Use the imported course data
-  const courseData = pomodoroCourseData
+  const courseData = initiationCourseData
 
   // Load progress when component mounts or account changes
   useEffect(() => {
     if (account) {
-      const progress = getCourseProgress('pomodoro')
+      const progress = getCourseProgress('initiation')
       setCourseProgress(progress.courseProgress || 0)
     }
   }, [account, getCourseProgress])
@@ -53,26 +53,22 @@ const PomodoroMasteryCourse = () => {
 
   const submitFinalQuiz = (partId) => {
     const score = calculateFinalQuizScore(partId)
-    updatePartScore('pomodoro', partId, score)
+    updatePartScore('initiation', partId, score)
     
     if (score >= 60) {
-      setCurrentPart(prev => Math.min(prev + 1, Object.keys(courseData).length))
-      setCurrentLesson(1)
+      // Since this is a single-part course, show completion message
       setShowFinalQuiz(false)
-      setFinalQuizAnswers({})
     }
   }
 
   const canAccessPart = (partId) => {
-    if (partId === 1) return true
-    const score = getPartScore('pomodoro', partId - 1)
-    return score >= 60
+    return true // All parts accessible in initiation course
   }
 
   const getLessonsToShow = (partId) => {
     const lessons = courseData[partId].lessons
     const completedCount = lessons.filter(lesson => 
-      isLessonCompleted('pomodoro', partId, lesson.id)
+      isLessonCompleted('initiation', partId, lesson.id)
     ).length
     
     return Math.min(completedCount + 1, lessons.length)
@@ -104,17 +100,17 @@ const PomodoroMasteryCourse = () => {
     }
 
     return (
-      <div className="bg-white rounded-lg p-6 mb-6 shadow-sm">
+      <div className="bg-white rounded-lg p-6 mb-6 shadow-sm border-2 border-purple-200">
         <h3 className="text-xl font-semibold mb-4 text-gray-900">
           Lesson {lesson.id} – "{lesson.title}"
         </h3>
         
         <div className="mb-6">
-          <p className="text-gray-700 leading-relaxed">{lesson.content}</p>
+          <p className="text-gray-700 leading-relaxed text-lg">{lesson.content}</p>
         </div>
         
         <div className="border-t pt-6">
-          <h4 className="font-medium mb-4 text-gray-900">Quiz:</h4>
+          <h4 className="font-medium mb-4 text-gray-900">Quick Check:</h4>
           <p className="mb-4 text-gray-700">{lesson.quiz.question}</p>
           
           <div className="space-y-3">
@@ -129,7 +125,7 @@ const PomodoroMasteryCourse = () => {
                       ? index === lesson.quiz.correct
                         ? 'bg-green-100 border-green-300 text-green-800'
                         : 'bg-red-100 border-red-300 text-red-800'
-                      : 'bg-blue-100 border-blue-300 text-blue-800'
+                      : 'bg-purple-100 border-purple-300 text-purple-800'
                     : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
                 }`}
               >
@@ -148,8 +144,8 @@ const PomodoroMasteryCourse = () => {
             <div className="mt-4 p-3 rounded-lg bg-gray-50">
               <p className="text-sm text-gray-600">
                 {selectedAnswer === lesson.quiz.correct 
-                  ? "Correct! Well done!" 
-                  : `Incorrect. The correct answer is: ${String.fromCharCode(65 + lesson.quiz.correct)}) ${lesson.quiz.options[lesson.quiz.correct]}`
+                  ? "Great job! You're learning well!" 
+                  : `No worries! The correct answer is: ${String.fromCharCode(65 + lesson.quiz.correct)}) ${lesson.quiz.options[lesson.quiz.correct]}`
                 }
               </p>
             </div>
@@ -181,9 +177,9 @@ const PomodoroMasteryCourse = () => {
     const allAnswered = Object.values(answers).every(answer => answer !== null)
 
     return (
-      <div className="bg-white rounded-lg p-6 shadow-sm">
+      <div className="bg-white rounded-lg p-6 shadow-sm border-2 border-purple-200">
         <h3 className="text-xl font-semibold mb-6 text-gray-900">
-          Final Quiz – Part {partId}: {courseData[partId].title}
+          Final Check – Welcome to SkillPath
         </h3>
         
         <div className="space-y-6">
@@ -202,7 +198,7 @@ const PomodoroMasteryCourse = () => {
                       value={optionIndex}
                       checked={answers[questionIndex] === optionIndex}
                       onChange={() => handleAnswerChange(questionIndex, optionIndex)}
-                      className="text-blue-600"
+                      className="text-purple-600"
                     />
                     <span className="text-gray-700">
                       {String.fromCharCode(65 + optionIndex)}) {option}
@@ -220,11 +216,11 @@ const PomodoroMasteryCourse = () => {
             disabled={!allAnswered}
             className={`px-6 py-2 rounded-lg font-medium transition-colors ${
               allAnswered
-                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-purple-600 text-white hover:bg-purple-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            Submit Quiz
+            Complete Initiation
           </button>
         </div>
       </div>
@@ -232,20 +228,23 @@ const PomodoroMasteryCourse = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Pomodoro Mastery Course
+          <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-3xl">🎓</span>
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Welcome to SkillPath
           </h1>
-          <p className="text-gray-600">
-            Master time management and productivity with the proven Pomodoro Technique
+          <p className="text-xl text-gray-600 mb-4">
+            Your initiation into the world of interactive learning
           </p>
           <div className="mt-4">
-            <div className="bg-gray-200 rounded-full h-2 max-w-md mx-auto">
+            <div className="bg-gray-200 rounded-full h-3 max-w-md mx-auto">
               <div 
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-purple-600 h-3 rounded-full transition-all duration-300"
                 style={{ width: `${courseProgress}%` }}
               ></div>
             </div>
@@ -266,18 +265,18 @@ const PomodoroMasteryCourse = () => {
                 }
               }}
               disabled={!canAccessPart(parseInt(partId))}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 currentPart === parseInt(partId)
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-purple-600 text-white'
                   : canAccessPart(parseInt(partId))
-                  ? 'bg-white text-gray-700 hover:bg-gray-50 border'
+                  ? 'bg-white text-gray-700 hover:bg-gray-50 border-2 border-purple-200'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
               Part {partId}
-              {getPartScore('pomodoro', partId) > 0 && (
+              {getPartScore('initiation', partId) > 0 && (
                 <span className="ml-2 text-xs">
-                  ({getPartScore('pomodoro', partId)}%)
+                  ({getPartScore('initiation', partId)}%)
                 </span>
               )}
             </button>
@@ -286,8 +285,8 @@ const PomodoroMasteryCourse = () => {
 
         {/* Current Part Content */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Part {currentPart}: {courseData[currentPart].title}
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
+            {courseData[currentPart].title}
           </h2>
           
           {showFinalQuiz ? (
@@ -305,7 +304,7 @@ const PomodoroMasteryCourse = () => {
                     lesson={lesson}
                     partId={currentPart}
                     onComplete={() => {
-                      markLessonComplete('pomodoro', currentPart, lesson.id)
+                      markLessonComplete('initiation', currentPart, lesson.id)
                       if (lesson.id === getLessonsToShow(currentPart)) {
                         nextLesson(currentPart)
                       }
@@ -316,7 +315,7 @@ const PomodoroMasteryCourse = () => {
               {getLessonsToShow(currentPart) < courseData[currentPart].lessons.length && (
                 <div className="text-center mt-6">
                   <p className="text-gray-600 mb-4">
-                    Complete the current lesson to unlock the next one
+                    Complete the current lesson to continue your journey
                   </p>
                 </div>
               )}
@@ -326,13 +325,30 @@ const PomodoroMasteryCourse = () => {
 
         {/* Course Completion */}
         {courseProgress === 100 && (
-          <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-            <h3 className="text-xl font-semibold text-green-800 mb-2">
-              🎉 Congratulations!
+          <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-200 rounded-lg p-8 text-center">
+            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🎉</span>
+            </div>
+            <h3 className="text-2xl font-semibold text-purple-800 mb-4">
+              Welcome to SkillPath!
             </h3>
-            <p className="text-green-700">
-              You've completed the Pomodoro Mastery course! You now have the skills to boost your productivity and manage your time effectively.
+            <p className="text-purple-700 text-lg mb-6">
+              You've successfully completed your initiation! You now understand how to navigate the platform, take lessons, and track your progress. You're ready to explore other courses and start your learning journey!
             </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => window.location.href = '/'}
+                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                Explore Courses
+              </button>
+              <button
+                onClick={() => window.location.href = '/dashboard'}
+                className="bg-white text-purple-600 px-6 py-2 rounded-lg border-2 border-purple-200 hover:bg-purple-50 transition-colors"
+              >
+                Go to Dashboard
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -340,4 +356,4 @@ const PomodoroMasteryCourse = () => {
   )
 }
 
-export default PomodoroMasteryCourse 
+export default InitiationCourse 

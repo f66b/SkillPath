@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { useWeb3 } from '../context/Web3Context'
+import { useProgress } from '../context/ProgressContext'
 
 const UserProfile = () => {
   const { account, signMessage, getENSName } = useWeb3()
+  const { getCourseProgress, getStatistics } = useProgress()
   const [ensName, setEnsName] = useState(null)
   const [isSigning, setIsSigning] = useState(false)
   const [signature, setSignature] = useState(null)
   const [courseProgress, setCourseProgress] = useState({
     pomodoro: 0,
     htmlcss: 0
+  })
+  const [statistics, setStatistics] = useState({
+    lessonsCompleted: 0,
+    quizzesPassed: 0,
+    certificatesEarned: 0,
+    hoursStudied: 0
   })
 
   // Get ENS name when component mounts
@@ -21,6 +29,21 @@ const UserProfile = () => {
     }
     fetchENSName()
   }, [account, getENSName])
+
+  // Load progress and statistics when account changes
+  useEffect(() => {
+    if (account) {
+      const pomodoroProgress = getCourseProgress('pomodoro')
+      const htmlcssProgress = getCourseProgress('htmlcss')
+      const stats = getStatistics()
+
+      setCourseProgress({
+        pomodoro: pomodoroProgress.courseProgress || 0,
+        htmlcss: htmlcssProgress.courseProgress || 0
+      })
+      setStatistics(stats)
+    }
+  }, [account, getCourseProgress, getStatistics])
 
   // Format address for display
   const formatAddress = (address) => {
@@ -176,19 +199,19 @@ const UserProfile = () => {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Learning Statistics</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-blue-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-blue-600">0</div>
+                <div className="text-2xl font-bold text-blue-600">{statistics.lessonsCompleted}</div>
                 <div className="text-sm text-blue-600">Lessons Completed</div>
               </div>
               <div className="bg-green-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-green-600">0</div>
+                <div className="text-2xl font-bold text-green-600">{statistics.quizzesPassed}</div>
                 <div className="text-sm text-green-600">Quizzes Passed</div>
               </div>
               <div className="bg-purple-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-purple-600">0</div>
+                <div className="text-2xl font-bold text-purple-600">{statistics.hoursStudied}</div>
                 <div className="text-sm text-purple-600">Hours Studied</div>
               </div>
               <div className="bg-orange-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-orange-600">0</div>
+                <div className="text-2xl font-bold text-orange-600">{statistics.certificatesEarned}</div>
                 <div className="text-sm text-orange-600">Certificates Earned</div>
               </div>
             </div>

@@ -255,5 +255,262 @@
         "correct": 1
       }
     ]
+  },
+  "2": {
+    "title": "Structure of a Web Page",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "HTML Headings",
+        "content": "HTML headings use tags from `<h1>` to `<h6>` to create a hierarchy of titles and subtitles. The `<h1>` tag represents the main heading and should be used only once per page, while `<h2>` through `<h6>` create subheadings of decreasing importance. Headings help organize content and improve accessibility.",
+        "quiz": {
+          "question": "How many h1 tags should you typically use per page?",
+          "options": [
+            "As many as you want",
+            "Only one",
+            "At least three",
+            "None"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 2,
+        "title": "Paragraphs and Text",
+        "content": "The `<p>` tag is used to create paragraphs of text. It automatically adds spacing before and after the content, making text more readable. You can also use other text elements like `<strong>` for bold text, `<em>` for italic text, and `<br>` for line breaks within paragraphs.",
+        "quiz": {
+          "question": "What does the p tag automatically add around text?",
+          "options": [
+            "Borders",
+            "Spacing before and after",
+            "Colors",
+            "Fonts"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 3,
+        "title": "Lists in HTML",
+        "content": "HTML supports two main types of lists: ordered lists (`<ol>`) with numbered items and unordered lists (`<ul>`) with bullet points. Each list item is wrapped in `<li>` tags. Lists help organize information in a structured, easy-to-read format.",
+        "quiz": {
+          "question": "What type of list uses bullet points?",
+          "options": [
+            "Ordered list (ol)",
+            "Unordered list (ul)",
+            "Definition list (dl)",
+            "Table list (table)"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 4,
+        "title": "Links and Navigation",
+        "content": "The `<a>` tag creates hyperlinks that connect web pages together. The `href` attribute specifies the destination URL. Links can point to other pages, specific sections within a page, or external websites. They're essential for creating a connected web experience.",
+        "quiz": {
+          "question": "Which attribute specifies where a link goes?",
+          "options": [
+            "src",
+            "href",
+            "link",
+            "url"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 5,
+        "title": "Images and Media",
+        "content": "The `<img>` tag displays images on web pages. The `src` attribute specifies the image file path, while `alt` provides alternative text for accessibility. Images can be local files or loaded from external URLs. The `alt` text is crucial for screen readers and SEO.",
+        "quiz": {
+          "question": "What is the purpose of the alt attribute in images?",
+          "options": [
+            "To make images load faster",
+            "To provide alternative text for accessibility",
+            "To change image colors",
+            "To resize images"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 6,
+        "title": "The Head Section",
+        "content": "The `<head>` section contains metadata about the webpage that isn't visible to users. It includes the page title, character encoding, viewport settings, and links to external resources like CSS files. This information helps browsers and search engines understand your page.",
+        "quiz": {
+          "question": "What is typically included in the head section?",
+          "options": [
+            "Visible page content",
+            "Page title and metadata",
+            "User interface elements",
+            "Interactive features"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 7,
+        "title": "The Body Section",
+        "content": "The `<body>` section contains all the visible content of your webpage, including text, images, links, and other elements that users see and interact with. Everything that appears on the screen goes inside the body tags.",
+        "quiz": {
+          "question": "Where does all visible webpage content go?",
+          "options": [
+            "In the head section",
+            "In the body section",
+            "In the title section",
+            "Outside the HTML tags"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 8,
+        "title": "Semantic HTML",
+        "content": "Semantic HTML uses meaningful tags that describe the content's purpose, like `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>`. These tags improve accessibility, SEO, and make code more readable and maintainable.",
+        "quiz": {
+          "question": "What is the main benefit of semantic HTML?",
+          "options": [
+            "It makes pages load faster",
+            "It improves accessibility and SEO",
+            "It reduces file size",
+            "It adds more colors"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 9,
+        "title": "Comments in HTML",
+        "content": "HTML comments use `<!-- -->` syntax and are ignored by browsers. They help document your code, explain complex sections, or temporarily disable code during development. Comments are valuable for collaboration and future maintenance.",
+        "quiz": {
+          "question": "How do you create an HTML comment?",
+          "options": [
+            "Using // syntax",
+            "Using <!-- --> syntax",
+            "Using /* */ syntax",
+            "Using # syntax"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 10,
+        "title": "Validating HTML",
+        "content": "HTML validation checks if your code follows the correct syntax and standards. Validators catch errors like missing closing tags, invalid attributes, or improper nesting. Valid HTML ensures better browser compatibility and accessibility.",
+        "quiz": {
+          "question": "What does HTML validation help with?",
+          "options": [
+            "Making pages load faster",
+            "Catching syntax errors and ensuring standards compliance",
+            "Adding more features",
+            "Changing page colors"
+          ],
+          "correct": 1
+        }
+      }
+    ],
+    "finalQuiz": [
+      {
+        "question": "How many h1 tags should you typically use per page?",
+        "options": [
+          "As many as you want",
+          "Only one",
+          "At least three",
+          "None"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What does the p tag automatically add around text?",
+        "options": [
+          "Borders",
+          "Spacing before and after",
+          "Colors",
+          "Fonts"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What type of list uses bullet points?",
+        "options": [
+          "Ordered list (ol)",
+          "Unordered list (ul)",
+          "Definition list (dl)",
+          "Table list (table)"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Which attribute specifies where a link goes?",
+        "options": [
+          "src",
+          "href",
+          "link",
+          "url"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is the purpose of the alt attribute in images?",
+        "options": [
+          "To make images load faster",
+          "To provide alternative text for accessibility",
+          "To change image colors",
+          "To resize images"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is typically included in the head section?",
+        "options": [
+          "Visible page content",
+          "Page title and metadata",
+          "User interface elements",
+          "Interactive features"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Where does all visible webpage content go?",
+        "options": [
+          "In the head section",
+          "In the body section",
+          "In the title section",
+          "Outside the HTML tags"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What is the main benefit of semantic HTML?",
+        "options": [
+          "It makes pages load faster",
+          "It improves accessibility and SEO",
+          "It reduces file size",
+          "It adds more colors"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How do you create an HTML comment?",
+        "options": [
+          "Using // syntax",
+          "Using <!-- --> syntax",
+          "Using /* */ syntax",
+          "Using # syntax"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What does HTML validation help with?",
+        "options": [
+          "Making pages load faster",
+          "Catching syntax errors and ensuring standards compliance",
+          "Adding more features",
+          "Changing page colors"
+        ],
+        "correct": 1
+      }
+    ]
   }
 } 

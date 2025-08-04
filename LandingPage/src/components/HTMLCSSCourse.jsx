@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { useWeb3 } from '../context/Web3Context'
+import { useProgress } from '../context/ProgressContext'
 import htmlcssCourseData from '../data/htmlcssCourse.json'
 
 const HTMLCSSCourse = () => {
+  const { account } = useWeb3()
+  const { 
+    getCourseProgress, 
+    markLessonComplete, 
+    updatePartScore, 
+    isLessonCompleted, 
+    getPartScore 
+  } = useProgress()
+  
   const [currentPart, setCurrentPart] = useState(1)
   const [currentLesson, setCurrentLesson] = useState(1)
-  const [completedLessons, setCompletedLessons] = useState({})
-  const [partScores, setPartScores] = useState({})
   const [showFinalQuiz, setShowFinalQuiz] = useState(false)
   const [finalQuizAnswers, setFinalQuizAnswers] = useState({})
   const [courseProgress, setCourseProgress] = useState(0)
@@ -13,13 +22,13 @@ const HTMLCSSCourse = () => {
   // Use the imported course data
   const courseData = htmlcssCourseData
 
-  // Helper functions
-  const markLessonComplete = (partId, lessonId) => {
-    setCompletedLessons(prev => ({
-      ...prev,
-      [`${partId}-${lessonId}`]: true
-    }))
-  }
+  // Load progress when component mounts or account changes
+  useEffect(() => {
+    if (account) {
+      const progress = getCourseProgress('htmlcss')
+      setCourseProgress(progress.courseProgress || 0)
+    }
+  }, [account, getCourseProgress])
 
   const handleFinalQuizAnswer = (partId, questionIndex, selectedAnswer) => {
     setFinalQuizAnswers(prev => ({
@@ -44,10 +53,7 @@ const HTMLCSSCourse = () => {
 
   const submitFinalQuiz = (partId) => {
     const score = calculateFinalQuizScore(partId)
-    setPartScores(prev => ({
-      ...prev,
-      [partId]: score
-    }))
+    updatePartScore('htmlcss', partId, score)
     
     if (score >= 60) {
       setCurrentPart(prev => Math.min(prev + 1, Object.keys(courseData).length))
@@ -59,13 +65,14 @@ const HTMLCSSCourse = () => {
 
   const canAccessPart = (partId) => {
     if (partId === 1) return true
-    return partScores[partId - 1] >= 60
+    const score = getPartScore('htmlcss', partId - 1)
+    return score >= 60
   }
 
   const getLessonsToShow = (partId) => {
     const lessons = courseData[partId].lessons
     const completedCount = lessons.filter(lesson => 
-      completedLessons[`${partId}-${lesson.id}`]
+      isLessonCompleted('htmlcss', partId, lesson.id)
     ).length
     
     return Math.min(completedCount + 1, lessons.length)
@@ -213,7 +220,7 @@ const HTMLCSSCourse = () => {
             disabled={!allAnswered}
             className={`px-6 py-2 rounded-lg font-medium transition-colors ${
               allAnswered
-                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-green-600 text-white hover:bg-green-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
@@ -224,40 +231,21 @@ const HTMLCSSCourse = () => {
     )
   }
 
-  // Calculate overall progress
-  useEffect(() => {
-    let totalLessons = 0
-    let completedTotal = 0
-    
-    Object.keys(courseData).forEach(partId => {
-      const part = courseData[partId]
-      totalLessons += part.lessons.length
-      
-      part.lessons.forEach(lesson => {
-        if (completedLessons[`${partId}-${lesson.id}`]) {
-          completedTotal++
-        }
-      })
-    })
-    
-    setCourseProgress(Math.round((completedTotal / totalLessons) * 100))
-  }, [completedLessons])
-
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            HTML & CSS Basics: Build Your First Web Page
+            HTML & CSS Basics
           </h1>
           <p className="text-gray-600">
-            Master the fundamentals of web development with this interactive course
+            Build your first web page from scratch! Learn HTML structure, CSS styling, and responsive design.
           </p>
           <div className="mt-4">
             <div className="bg-gray-200 rounded-full h-2 max-w-md mx-auto">
               <div 
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-green-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${courseProgress}%` }}
               ></div>
             </div>
@@ -280,16 +268,16 @@ const HTMLCSSCourse = () => {
               disabled={!canAccessPart(parseInt(partId))}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 currentPart === parseInt(partId)
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-green-600 text-white'
                   : canAccessPart(parseInt(partId))
                   ? 'bg-white text-gray-700 hover:bg-gray-50 border'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'
               }`}
             >
               Part {partId}
-              {partScores[partId] && (
+              {getPartScore('htmlcss', partId) > 0 && (
                 <span className="ml-2 text-xs">
-                  ({partScores[partId]}%)
+                  ({getPartScore('htmlcss', partId)}%)
                 </span>
               )}
             </button>
@@ -317,7 +305,7 @@ const HTMLCSSCourse = () => {
                     lesson={lesson}
                     partId={currentPart}
                     onComplete={() => {
-                      markLessonComplete(currentPart, lesson.id)
+                      markLessonComplete('htmlcss', currentPart, lesson.id)
                       if (lesson.id === getLessonsToShow(currentPart)) {
                         nextLesson(currentPart)
                       }
@@ -343,7 +331,7 @@ const HTMLCSSCourse = () => {
               🎉 Congratulations!
             </h3>
             <p className="text-green-700">
-              You've completed the HTML & CSS Basics course! You now have the skills to build your own web pages.
+              You've completed the HTML & CSS Basics course! You now have the skills to create beautiful, responsive websites.
             </p>
           </div>
         )}

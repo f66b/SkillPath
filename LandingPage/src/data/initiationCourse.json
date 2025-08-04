@@ -1,0 +1,259 @@
+{
+  "1": {
+    "title": "Welcome to SkillPath",
+    "lessons": [
+      {
+        "id": 1,
+        "title": "Welcome to Your Learning Journey",
+        "content": "Welcome to SkillPath! This is your personal learning platform where you can master new skills at your own pace. Each course is designed to be interactive, engaging, and practical. You'll learn through short lessons, take quizzes to test your knowledge, and track your progress as you go.",
+        "quiz": {
+          "question": "What is SkillPath?",
+          "options": [
+            "A social media platform",
+            "A personal learning platform",
+            "A gaming website",
+            "A shopping site"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 2,
+        "title": "How Lessons Work",
+        "content": "Each lesson contains a short explanation of a concept, followed by a simple quiz to help you remember what you learned. Don't worry about getting answers wrong - the goal is to learn! You can take the quiz as many times as you need, and your progress is automatically saved.",
+        "quiz": {
+          "question": "What happens after each lesson?",
+          "options": [
+            "You have to wait 24 hours",
+            "You take a simple quiz",
+            "You get a certificate",
+            "Nothing happens"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 3,
+        "title": "Understanding Progress",
+        "content": "Your progress is tracked automatically as you complete lessons. You'll see a progress bar at the top of each course showing how much you've completed. The more lessons you finish, the higher your progress percentage will be. This helps you stay motivated and see your learning journey.",
+        "quiz": {
+          "question": "How is your progress tracked?",
+          "options": [
+            "You have to track it manually",
+            "It's tracked automatically",
+            "Only your teacher can see it",
+            "Progress is not tracked"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 4,
+        "title": "Taking Quizzes",
+        "content": "Quizzes are designed to be helpful, not stressful! Each quiz has multiple choice questions with clear options. You'll get immediate feedback on your answers, and you can review the correct answers if you make mistakes. Remember, learning is about understanding, not perfection.",
+        "quiz": {
+          "question": "What should you do if you get a quiz answer wrong?",
+          "options": [
+            "Give up on the course",
+            "Review the correct answer and learn from it",
+            "Skip the quiz entirely",
+            "Start over from the beginning"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 5,
+        "title": "Your Learning Dashboard",
+        "content": "Your personal dashboard shows all your courses, progress, and achievements. You can add courses to your collection, track your learning statistics, and see how much time you've spent learning. It's your central hub for managing your learning journey.",
+        "quiz": {
+          "question": "Where can you see all your courses and progress?",
+          "options": [
+            "Only in your email",
+            "On your personal dashboard",
+            "You can't see your progress",
+            "Only on mobile devices"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 6,
+        "title": "Wallet Connection",
+        "content": "SkillPath uses blockchain technology to securely save your progress. When you connect your wallet, your learning data is saved specifically to your wallet address. This means your progress is private, secure, and accessible from any device when you connect the same wallet.",
+        "quiz": {
+          "question": "Why do you need to connect a wallet?",
+          "options": [
+            "To pay for courses",
+            "To securely save your progress",
+            "To play games",
+            "It's not required"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 7,
+        "title": "Course Navigation",
+        "content": "Courses are organized into parts, and each part contains several lessons. You can navigate between parts using the buttons at the top. Some parts may be locked until you complete previous ones. This helps ensure you build a strong foundation before moving to advanced topics.",
+        "quiz": {
+          "question": "How are courses organized?",
+          "options": [
+            "In random order",
+            "Into parts with lessons",
+            "Only in one long lesson",
+            "By difficulty only"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 8,
+        "title": "Getting Help",
+        "content": "If you ever get stuck or have questions, don't hesitate to ask for help! The platform is designed to be user-friendly, but learning new things can sometimes be challenging. Take your time, review lessons if needed, and remember that everyone learns at their own pace.",
+        "quiz": {
+          "question": "What should you do if you get stuck?",
+          "options": [
+            "Give up immediately",
+            "Ask for help and take your time",
+            "Skip to the end",
+            "Ignore the problem"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 9,
+        "title": "Setting Learning Goals",
+        "content": "Setting small, achievable goals can help you stay motivated. Maybe you want to complete one lesson per day, or finish a course within a week. Whatever your goal, remember that consistent small steps lead to big achievements. Celebrate your progress along the way!",
+        "quiz": {
+          "question": "What's a good approach to learning goals?",
+          "options": [
+            "Set impossible goals",
+            "Set small, achievable goals",
+            "Don't set any goals",
+            "Only focus on speed"
+          ],
+          "correct": 1
+        }
+      },
+      {
+        "id": 10,
+        "title": "You're Ready to Start!",
+        "content": "Congratulations! You've completed the initiation course and learned the basics of how SkillPath works. You now understand how to navigate lessons, take quizzes, track your progress, and use your dashboard. You're ready to explore other courses and start your learning journey!",
+        "quiz": {
+          "question": "What have you learned in this initiation course?",
+          "options": [
+            "Nothing useful",
+            "How to use the SkillPath platform",
+            "Advanced programming",
+            "How to cook"
+          ],
+          "correct": 1
+        }
+      }
+    ],
+    "finalQuiz": [
+      {
+        "question": "What is SkillPath?",
+        "options": [
+          "A social media platform",
+          "A personal learning platform",
+          "A gaming website",
+          "A shopping site"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What happens after each lesson?",
+        "options": [
+          "You have to wait 24 hours",
+          "You take a simple quiz",
+          "You get a certificate",
+          "Nothing happens"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How is your progress tracked?",
+        "options": [
+          "You have to track it manually",
+          "It's tracked automatically",
+          "Only your teacher can see it",
+          "Progress is not tracked"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What should you do if you get a quiz answer wrong?",
+        "options": [
+          "Give up on the course",
+          "Review the correct answer and learn from it",
+          "Skip the quiz entirely",
+          "Start over from the beginning"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Where can you see all your courses and progress?",
+        "options": [
+          "Only in your email",
+          "On your personal dashboard",
+          "You can't see your progress",
+          "Only on mobile devices"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "Why do you need to connect a wallet?",
+        "options": [
+          "To pay for courses",
+          "To securely save your progress",
+          "To play games",
+          "It's not required"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "How are courses organized?",
+        "options": [
+          "In random order",
+          "Into parts with lessons",
+          "Only in one long lesson",
+          "By difficulty only"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What should you do if you get stuck?",
+        "options": [
+          "Give up immediately",
+          "Ask for help and take your time",
+          "Skip to the end",
+          "Ignore the problem"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What's a good approach to learning goals?",
+        "options": [
+          "Set impossible goals",
+          "Set small, achievable goals",
+          "Don't set any goals",
+          "Only focus on speed"
+        ],
+        "correct": 1
+      },
+      {
+        "question": "What have you learned in this initiation course?",
+        "options": [
+          "Nothing useful",
+          "How to use the SkillPath platform",
+          "Advanced programming",
+          "How to cook"
+        ],
+        "correct": 1
+      }
+    ]
+  }
+} 
