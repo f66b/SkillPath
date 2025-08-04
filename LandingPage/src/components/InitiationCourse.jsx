@@ -4,6 +4,7 @@ import { useProgress } from '../context/ProgressContext'
 import initiationCourseData from '../data/initiationCourse.json'
 
 const InitiationCourse = () => {
+  console.log('InitiationCourse component rendering')
   const { account } = useWeb3()
   const { 
     getCourseProgress, 
@@ -21,6 +22,7 @@ const InitiationCourse = () => {
 
   // Use the imported course data
   const courseData = initiationCourseData
+  console.log('Course data loaded:', courseData)
 
   // Load progress when component mounts or account changes
   useEffect(() => {
@@ -36,7 +38,7 @@ const InitiationCourse = () => {
       const progress = getCourseProgress('initiation')
       setCourseProgress(progress.courseProgress || 0)
     }
-  }, [progress, account, getCourseProgress])
+  }, [account, getCourseProgress])
 
   const handleFinalQuizAnswer = (partId, questionIndex, selectedAnswer) => {
     setFinalQuizAnswers(prev => ({

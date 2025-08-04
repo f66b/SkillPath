@@ -63,6 +63,7 @@ function App() {
   }
 
   const selectCourse = (courseType) => {
+    console.log('Selecting course:', courseType)
     setSelectedCourse(courseType)
   }
 
