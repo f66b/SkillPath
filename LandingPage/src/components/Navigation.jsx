@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import WalletConnect from './WalletConnect'
 
 const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -38,9 +39,7 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
                 >
                   How it Works
                 </button>
-                <a href="#" className="text-slate-text hover:text-emerald-custom transition-colors">
-                  Sign In
-                </a>
+                <WalletConnect />
                 <button 
                   onClick={onStartCourse}
                   className="bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors soft-shadow"
@@ -51,6 +50,7 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
             ) : (
               <>
                 <span className="text-slate-text font-medium">Productivity 101 Course</span>
+                <WalletConnect />
                 <button 
                   onClick={onBackToLanding}
                   className="text-slate-text hover:text-emerald-custom transition-colors"
@@ -62,7 +62,8 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <WalletConnect />
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-500 hover:text-gray-600"
@@ -91,9 +92,6 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse }) => {
                 >
                   How it Works
                 </button>
-                <a href="#" className="block text-slate-text hover:text-emerald-custom transition-colors">
-                  Sign In
-                </a>
                 <button 
                   onClick={onStartCourse}
                   className="w-full bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors"
