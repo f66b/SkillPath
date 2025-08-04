@@ -188,6 +188,48 @@ const PersonalDashboard = () => {
           </div>
         </div>
 
+        {/* Trophy Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">🏆 My Trophies</h2>
+            <button
+              onClick={() => window.location.href = '/trophies'}
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium"
+            >
+              View All Trophies
+            </button>
+          </div>
+          <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+            <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-2xl">🏆</span>
+            </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Earn Trophies for Your Achievements</h3>
+            <p className="text-gray-600 mb-6">
+              Complete courses to earn unique, non-transferable NFT trophies that showcase your learning journey
+            </p>
+            <div className="flex justify-center space-x-4">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <span className="text-lg">🎓</span>
+                </div>
+                <p className="text-sm text-gray-600">Course Completion</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <span className="text-lg">🔒</span>
+                </div>
+                <p className="text-sm text-gray-600">Soulbound NFTs</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                  <span className="text-lg">✨</span>
+                </div>
+                <p className="text-sm text-gray-600">Unique Metadata</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* My Courses Section */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">My Courses</h2>

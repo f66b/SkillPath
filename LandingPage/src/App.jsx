@@ -13,11 +13,12 @@ import HTMLCSSCourse from './components/HTMLCSSCourse'
 import InitiationCourse from './components/InitiationCourse'
 import ProtectedRoute from './components/ProtectedRoute'
 import PersonalDashboard from './components/PersonalDashboard'
+import TrophySystem from './components/TrophySystem'
 
 function App() {
   const [showCourse, setShowCourse] = useState(false)
   const [selectedCourse, setSelectedCourse] = useState(null)
-  const [currentView, setCurrentView] = useState('landing') // 'landing', 'course', 'dashboard'
+  const [currentView, setCurrentView] = useState('landing') // 'landing', 'course', 'dashboard', 'trophies'
 
   // Handle URL changes for dashboard routing
   useEffect(() => {
@@ -28,6 +29,11 @@ function App() {
     if (path === '/dashboard') {
       console.log('Setting view to dashboard')
       setCurrentView('dashboard')
+      setShowCourse(false)
+      setSelectedCourse(null)
+    } else if (path === '/trophies') {
+      console.log('Setting view to trophies')
+      setCurrentView('trophies')
       setShowCourse(false)
       setSelectedCourse(null)
     } else if (path === '/course' || path === '/courses') {
@@ -62,6 +68,13 @@ function App() {
     window.history.pushState({}, '', '/dashboard')
   }
 
+  const goToTrophies = () => {
+    setCurrentView('trophies')
+    setShowCourse(false)
+    setSelectedCourse(null)
+    window.history.pushState({}, '', '/trophies')
+  }
+
   const selectCourse = (courseType) => {
     console.log('Selecting course:', courseType)
     setSelectedCourse(courseType)
@@ -73,6 +86,10 @@ function App() {
       const path = window.location.pathname
       if (path === '/dashboard') {
         setCurrentView('dashboard')
+        setShowCourse(false)
+        setSelectedCourse(null)
+      } else if (path === '/trophies') {
+        setCurrentView('trophies')
         setShowCourse(false)
         setSelectedCourse(null)
       } else if (path === '/course' || path === '/courses') {
@@ -101,10 +118,35 @@ function App() {
               onBackToLanding={backToLanding} 
               showCourse={showCourse}
               onGoToDashboard={goToDashboard}
+              onGoToTrophies={goToTrophies}
             />
             <div className="pt-16">
               <ProtectedRoute>
                 <PersonalDashboard />
+              </ProtectedRoute>
+            </div>
+          </div>
+        </ProgressProvider>
+      </Web3Provider>
+    )
+  }
+
+  // Trophies view
+  if (currentView === 'trophies') {
+    return (
+      <Web3Provider>
+        <ProgressProvider>
+          <div className="min-h-screen bg-gray-50">
+            <Navigation 
+              onStartCourse={startCourse} 
+              onBackToLanding={backToLanding} 
+              showCourse={showCourse}
+              onGoToDashboard={goToDashboard}
+              onGoToTrophies={goToTrophies}
+            />
+            <div className="pt-16">
+              <ProtectedRoute>
+                <TrophySystem />
               </ProtectedRoute>
             </div>
           </div>
@@ -124,6 +166,7 @@ function App() {
               onBackToLanding={backToLanding} 
               showCourse={showCourse}
               onGoToDashboard={goToDashboard}
+              onGoToTrophies={goToTrophies}
             />
             <div className="pt-16">
               {selectedCourse === 'initiation' && <InitiationCourse />}
@@ -147,6 +190,7 @@ function App() {
               onBackToLanding={backToLanding} 
               showCourse={showCourse}
               onGoToDashboard={goToDashboard}
+              onGoToTrophies={goToTrophies}
             />
             <div className="pt-16">
               <ProtectedRoute>
@@ -246,6 +290,7 @@ function App() {
             onBackToLanding={backToLanding} 
             showCourse={showCourse}
             onGoToDashboard={goToDashboard}
+            onGoToTrophies={goToTrophies}
           />
           <Hero onStartCourse={startCourse} />
           <AIAssistant />

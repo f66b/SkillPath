@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useWeb3 } from '../context/Web3Context'
 import WalletConnect from './WalletConnect'
 
-const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboard }) => {
+const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboard, onGoToTrophies }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { account } = useWeb3()
 
@@ -17,6 +17,13 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboar
   const goToDashboard = () => {
     if (onGoToDashboard) {
       onGoToDashboard()
+    }
+    setIsMobileMenuOpen(false)
+  }
+
+  const goToTrophies = () => {
+    if (onGoToTrophies) {
+      onGoToTrophies()
     }
     setIsMobileMenuOpen(false)
   }
@@ -56,6 +63,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboar
                     My Dashboard
                   </button>
                 )}
+                {account && (
+                  <button 
+                    onClick={goToTrophies}
+                    className="text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    🏆 Trophies
+                  </button>
+                )}
                 <WalletConnect />
                 <button 
                   onClick={onStartCourse}
@@ -73,6 +88,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboar
                     className="text-slate-text hover:text-emerald-custom transition-colors"
                   >
                     My Dashboard
+                  </button>
+                )}
+                {account && (
+                  <button 
+                    onClick={goToTrophies}
+                    className="text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    🏆 Trophies
                   </button>
                 )}
                 <WalletConnect />
@@ -125,6 +148,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboar
                     My Dashboard
                   </button>
                 )}
+                {account && (
+                  <button 
+                    onClick={goToTrophies}
+                    className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    🏆 Trophies
+                  </button>
+                )}
                 <button 
                   onClick={onStartCourse}
                   className="w-full bg-emerald-custom text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-500 transition-colors"
@@ -141,6 +172,14 @@ const Navigation = ({ onStartCourse, onBackToLanding, showCourse, onGoToDashboar
                     className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
                   >
                     My Dashboard
+                  </button>
+                )}
+                {account && (
+                  <button 
+                    onClick={goToTrophies}
+                    className="block w-full text-left text-slate-text hover:text-emerald-custom transition-colors"
+                  >
+                    🏆 Trophies
                   </button>
                 )}
                 <button 
