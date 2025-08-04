@@ -1,0 +1,31 @@
+{
+  "name": "skillpath-trophies-contracts",
+  "version": "1.0.0",
+  "description": "Smart contracts for SkillPath trophy system",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network mumbai",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network polygon",
+    "verify": "hardhat verify"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0",
+    "dotenv": "^16.3.1"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart-contracts",
+    "nft",
+    "soulbound",
+    "education"
+  ],
+  "author": "SkillPath Team",
+  "license": "MIT"
+} 

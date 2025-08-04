@@ -1,0 +1,34 @@
+{
+  "name": "SkillPath Trophy - HTML & CSS Fundamentals",
+  "description": "Awarded to 0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6 for completing the HTML & CSS Fundamentals course on SkillPath.",
+  "image": "https://ipfs.io/ipfs/QmYourTrophyImageHash1",
+  "attributes": [
+    {
+      "trait_type": "Course ID",
+      "value": "1"
+    },
+    {
+      "trait_type": "Date Claimed",
+      "value": "1703123456"
+    },
+    {
+      "trait_type": "Non-Transferable",
+      "value": "true"
+    },
+    {
+      "trait_type": "Difficulty",
+      "value": "Beginner"
+    },
+    {
+      "trait_type": "Category",
+      "value": "Web Development"
+    },
+    {
+      "trait_type": "Completion Time",
+      "value": "2 weeks"
+    }
+  ],
+  "external_url": "https://skillpath.com/trophies/1",
+  "background_color": "000000",
+  "animation_url": ""
+} 
