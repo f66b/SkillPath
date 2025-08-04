@@ -1,20 +1,85 @@
 // Progress Service for JSON file operations
-import userProgressData from '../data/userProgress.json'
 
 class ProgressService {
   constructor() {
-    this.progressData = userProgressData
+    this.progressData = this.initializeProgressData()
     this.filePath = '/src/data/userProgress.json'
+  }
+
+  // Initialize progress data structure
+  initializeProgressData() {
+    return {
+      users: {
+        "0x0000000000000000000000000000000000000000": {
+          walletAddress: "0x0000000000000000000000000000000000000000",
+          lastUpdated: new Date().toISOString(),
+          courses: {
+            initiation: {
+              completedLessons: {},
+              partScores: {},
+              courseProgress: 0,
+              lastAccessed: new Date().toISOString()
+            },
+            pomodoro: {
+              completedLessons: {},
+              partScores: {},
+              courseProgress: 0,
+              lastAccessed: new Date().toISOString()
+            },
+            htmlcss: {
+              completedLessons: {},
+              partScores: {},
+              courseProgress: 0,
+              lastAccessed: new Date().toISOString()
+            }
+          },
+          statistics: {
+            lessonsCompleted: 0,
+            quizzesPassed: 0,
+            certificatesEarned: 0,
+            hoursStudied: 0
+          }
+        }
+      },
+      metadata: {
+        version: "1.0.0",
+        lastBackup: new Date().toISOString(),
+        totalUsers: 1
+      }
+    }
   }
 
   // Get user progress by wallet address
   getUserProgress(walletAddress) {
     if (!walletAddress) return null
     
-    const user = this.progressData.users[walletAddress]
+    // First try to get from memory
+    let user = this.progressData.users[walletAddress]
+    
+    // If not in memory, try to load from localStorage
     if (!user) {
-      // Create new user entry if doesn't exist
-      return this.createNewUser(walletAddress)
+      try {
+        const storedData = localStorage.getItem(`skillpath_progress_${walletAddress}`)
+        if (storedData) {
+          const parsedData = JSON.parse(storedData)
+          // Create user object from stored data
+          user = {
+            walletAddress: walletAddress,
+            lastUpdated: new Date().toISOString(),
+            courses: parsedData,
+            statistics: this.calculateUserStatistics({ courses: parsedData })
+          }
+          // Add to memory
+          this.progressData.users[walletAddress] = user
+        }
+      } catch (error) {
+        console.error('Error loading from localStorage:', error)
+      }
+    }
+    
+    // If still no user, create new one
+    if (!user) {
+      user = this.createNewUser(walletAddress)
     }
     
     return user
@@ -232,8 +297,14 @@ class ProgressService {
       // Simulate saving to file
       console.log('Progress data updated:', this.progressData)
       
-      // You could also use localStorage as a fallback
+      // Save to localStorage as backup
       localStorage.setItem('skillpath_progress_backup', JSON.stringify(this.progressData))
+      
+      // Also save individual user data for easier access
+      Object.keys(this.progressData.users).forEach(walletAddress => {
+        const userData = this.progressData.users[walletAddress]
+        localStorage.setItem(`skillpath_progress_${walletAddress}`, JSON.stringify(userData.courses))
+      })
       
       return true
     } catch (error) {
