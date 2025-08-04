@@ -1470,25 +1470,35 @@ const PomodoroMasteryCourse = () => {
 
   const FinalQuizComponent = ({ partId, onSubmit }) => {
     const quiz = courseData[partId].finalQuiz
-    const [answers, setAnswers] = useState({})
     const [showResults, setShowResults] = useState(false)
 
+    // Get answers from parent component state
+    const getAnswers = () => {
+      const answers = {}
+      quiz.forEach((_, index) => {
+        const key = `${partId}-${index}`
+        if (finalQuizAnswers[key] !== undefined) {
+          answers[index] = finalQuizAnswers[key]
+        }
+      })
+      return answers
+    }
+
     const handleAnswerChange = (questionIndex, answerIndex) => {
-      setAnswers(prev => ({ ...prev, [questionIndex]: answerIndex }))
-      // Update the parent component's state as well
       setFinalQuizAnswers(prev => ({ ...prev, [`${partId}-${questionIndex}`]: answerIndex }))
     }
 
       const submitQuiz = () => {
     // Only allow submission if all questions are answered
-    if (Object.keys(answers).length !== quiz.length) {
+    const currentAnswers = getAnswers()
+    if (Object.keys(currentAnswers).length !== quiz.length) {
       return
     }
     setShowResults(true)
     setTimeout(() => onSubmit(partId), 2000)
   }
 
-  const allAnswered = Object.keys(answers).length === quiz.length
+  const allAnswered = Object.keys(getAnswers()).length === quiz.length
     const score = showResults ? calculateFinalQuizScore(partId) : 0
 
     return (
@@ -1506,7 +1516,8 @@ const PomodoroMasteryCourse = () => {
               
               <div className="space-y-2">
                 {question.options.map((option, oIndex) => {
-                  const isSelected = answers[qIndex] === oIndex
+                  const currentAnswers = getAnswers()
+                  const isSelected = currentAnswers[qIndex] === oIndex
                   const isCorrect = oIndex === question.correct
                   const showCorrection = showResults && (isSelected || isCorrect)
                   
