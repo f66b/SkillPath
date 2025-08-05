@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
 import { useProgress } from '../context/ProgressContext';
+import { simulateCourseCompletion, resetCourseProgress, getCourseStatus } from '../utils/simulateProgress';
 
 // Contract ABI for the deployed contract
 const CONTRACT_ABI = [
@@ -55,13 +56,29 @@ const TrophySystem = () => {
         return;
       }
       
+      console.log('Initializing contract with address:', CONTRACT_ADDRESS);
+      console.log('Provider:', provider);
+      
       const signer = await provider.getSigner();
+      console.log('Signer:', signer);
+      
       const contractInstance = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+      
+      // Test the contract connection
+      try {
+        const totalSupply = await contractInstance.totalSupply();
+        console.log('Contract connection successful. Total supply:', totalSupply.toString());
+      } catch (testError) {
+        console.error('Contract connection test failed:', testError);
+        setError('Contract address is invalid or network is not available. Please check your configuration.');
+        return;
+      }
+      
       setContract(contractInstance);
-      console.log('Contract initialized:', contractInstance);
+      console.log('Contract initialized successfully:', contractInstance);
     } catch (error) {
       console.error('Error initializing contract:', error);
-      setError('Failed to connect to trophy contract. Make sure you have the correct contract address.');
+      setError('Failed to connect to trophy contract. Make sure you have the correct contract address and network.');
     }
   };
 
@@ -109,16 +126,28 @@ const TrophySystem = () => {
         
         // Check if course is completed (100% progress)
         if (courseProgress && courseProgress.courseProgress >= 100) {
-          // Check if trophy already claimed on blockchain
-          const hasClaimed = await contract.hasUserClaimed(courseIdMapping[courseId], account);
-          
-          if (!hasClaimed) {
-            const courseInfo = await contract.courses(courseIdMapping[courseId]);
+          try {
+            // Check if trophy already claimed on blockchain
+            const hasClaimed = await contract.hasUserClaimed(courseIdMapping[courseId], account);
+            
+            if (!hasClaimed) {
+              const courseInfo = await contract.courses(courseIdMapping[courseId]);
+              available.push({
+                courseId: courseIdMapping[courseId],
+                courseName: courseInfo.name,
+                courseDescription: courseInfo.description,
+                imageUri: courseInfo.imageUri
+              });
+            }
+          } catch (blockchainError) {
+            console.error(`Error checking blockchain for course ${courseId}:`, blockchainError);
+            // If blockchain check fails, still show the trophy as available
+            // This allows users to claim even if there are temporary blockchain issues
             available.push({
               courseId: courseIdMapping[courseId],
-              courseName: courseInfo.name,
-              courseDescription: courseInfo.description,
-              imageUri: courseInfo.imageUri
+              courseName: courseId.charAt(0).toUpperCase() + courseId.slice(1) + ' Course',
+              courseDescription: `Complete the ${courseId} course to earn this trophy`,
+              imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash1"
             });
           }
         }
@@ -208,6 +237,72 @@ const TrophySystem = () => {
             Contract: {CONTRACT_ADDRESS.slice(0, 6)}...{CONTRACT_ADDRESS.slice(-4)}
           </div>
         </div>
+
+        {/* Debug Panel - Only show in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+            <h3 className="text-lg font-semibold text-yellow-800 mb-4">🔧 Debug Panel (Development Only)</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <h4 className="font-medium text-yellow-700 mb-2">Course Status</h4>
+                {['initiation', 'pomodoro', 'htmlcss'].map(courseType => {
+                  const status = getCourseStatus(account, courseType);
+                  return (
+                    <div key={courseType} className="text-sm text-yellow-600 mb-1">
+                      {courseType}: {status.progress}% ({status.completedLessons}/{status.totalLessons})
+                    </div>
+                  );
+                })}
+              </div>
+              <div>
+                <h4 className="font-medium text-yellow-700 mb-2">Quick Actions</h4>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => simulateCourseCompletion(account, 'initiation')}
+                    className="block w-full text-xs bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700"
+                  >
+                    Complete Initiation
+                  </button>
+                  <button
+                    onClick={() => simulateCourseCompletion(account, 'pomodoro')}
+                    className="block w-full text-xs bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700"
+                  >
+                    Complete Pomodoro
+                  </button>
+                  <button
+                    onClick={() => simulateCourseCompletion(account, 'htmlcss')}
+                    className="block w-full text-xs bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700"
+                  >
+                    Complete HTML/CSS
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h4 className="font-medium text-yellow-700 mb-2">Reset Actions</h4>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => resetCourseProgress(account, 'initiation')}
+                    className="block w-full text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
+                  >
+                    Reset Initiation
+                  </button>
+                  <button
+                    onClick={() => resetCourseProgress(account, 'pomodoro')}
+                    className="block w-full text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
+                  >
+                    Reset Pomodoro
+                  </button>
+                  <button
+                    onClick={() => resetCourseProgress(account, 'htmlcss')}
+                    className="block w-full text-xs bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700"
+                  >
+                    Reset HTML/CSS
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
