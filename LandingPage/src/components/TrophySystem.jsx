@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { ethers } from 'ethers';
 import { useWeb3 } from '../context/Web3Context';
 import { useProgress } from '../context/ProgressContext';
 
+// Contract ABI for the deployed contract
+const CONTRACT_ABI = [
+  "function claimTrophy(uint256 courseId) external",
+  "function hasUserClaimed(uint256 courseId, address user) external view returns (bool)",
+  "function getUserTrophies(address user) external view returns (uint256[])",
+  "function getTrophyMetadata(uint256 tokenId) external view returns (tuple(uint256 courseId, address userAddress, uint256 dateClaimed, string courseName))",
+  "function tokenURI(uint256 tokenId) external view returns (string)",
+  "function courses(uint256 courseId) external view returns (tuple(string name, string description, string imageUri, bool exists))",
+  "function totalSupply() external view returns (uint256)"
+];
+
 const TrophySystem = () => {
-  const { account } = useWeb3();
+  const { account, provider } = useWeb3();
   const { progress, getCourseProgress } = useProgress();
   
+  const [contract, setContract] = useState(null);
   const [userTrophies, setUserTrophies] = useState([]);
   const [availableTrophies, setAvailableTrophies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [claiming, setClaiming] = useState({});
 
-  // Mock contract data for demonstration
-  const mockCourses = {
-    1: {
-      name: "Welcome to SkillPath",
-      description: "Get started with this simple initiation course to learn how the platform works",
-      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash1"
-    },
-    2: {
-      name: "Pomodoro Mastery Course",
-      description: "Master time management and productivity with the proven Pomodoro Technique",
-      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash2"
-    },
-    3: {
-      name: "HTML & CSS Basics",
-      description: "Build your first web page from scratch! Learn HTML structure, CSS styling, and responsive design",
-      imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash3"
-    }
-  };
+  // Contract address - update this with your deployed contract address
+  const CONTRACT_ADDRESS = process.env.REACT_APP_TROPHY_CONTRACT_ADDRESS || "0x0000000000000000000000000000000000000000";
 
   // Course ID mapping
   const courseIdMapping = {
@@ -39,23 +36,62 @@ const TrophySystem = () => {
   };
 
   useEffect(() => {
-    if (account) {
+    if (provider && account) {
+      initializeContract();
+    }
+  }, [provider, account]);
+
+  useEffect(() => {
+    if (contract && account) {
       loadUserTrophies();
       loadAvailableTrophies();
     }
-  }, [account, progress]);
+  }, [contract, account, progress]);
+
+  const initializeContract = async () => {
+    try {
+      if (!provider) {
+        setError('Provider not available');
+        return;
+      }
+      
+      const signer = await provider.getSigner();
+      const contractInstance = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+      setContract(contractInstance);
+      console.log('Contract initialized:', contractInstance);
+    } catch (error) {
+      console.error('Error initializing contract:', error);
+      setError('Failed to connect to trophy contract. Make sure you have the correct contract address.');
+    }
+  };
 
   const loadUserTrophies = async () => {
     try {
       setLoading(true);
-      // Load claimed trophies from localStorage
-      const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
-      const trophies = JSON.parse(claimedTrophies);
-      
+      const tokenIds = await contract.getUserTrophies(account);
+      const trophies = [];
+
+      for (const tokenId of tokenIds) {
+        const metadata = await contract.getTrophyMetadata(tokenId);
+        const tokenUri = await contract.tokenURI(tokenId);
+        
+        // Parse the base64 metadata
+        const jsonData = JSON.parse(atob(tokenUri.replace('data:application/json;base64,', '')));
+        
+        trophies.push({
+          tokenId: tokenId.toString(),
+          courseId: metadata.courseId.toString(),
+          courseName: metadata.courseName,
+          dateClaimed: new Date(metadata.dateClaimed * 1000).toISOString(),
+          userAddress: metadata.userAddress,
+          metadata: jsonData
+        });
+      }
+
       setUserTrophies(trophies.sort((a, b) => new Date(b.dateClaimed) - new Date(a.dateClaimed)));
     } catch (error) {
       console.error('Error loading user trophies:', error);
-      setError('Failed to load trophies');
+      setError('Failed to load trophies from blockchain');
     } finally {
       setLoading(false);
     }
@@ -73,13 +109,11 @@ const TrophySystem = () => {
         
         // Check if course is completed (100% progress)
         if (courseProgress && courseProgress.courseProgress >= 100) {
-          // Check if trophy already claimed
-          const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
-          const trophies = JSON.parse(claimedTrophies);
-          const hasClaimed = trophies.some(trophy => trophy.courseId === courseIdMapping[courseId]);
+          // Check if trophy already claimed on blockchain
+          const hasClaimed = await contract.hasUserClaimed(courseIdMapping[courseId], account);
           
           if (!hasClaimed) {
-            const courseInfo = mockCourses[courseIdMapping[courseId]];
+            const courseInfo = await contract.courses(courseIdMapping[courseId]);
             available.push({
               courseId: courseIdMapping[courseId],
               courseName: courseInfo.name,
@@ -94,6 +128,7 @@ const TrophySystem = () => {
       setAvailableTrophies(available);
     } catch (error) {
       console.error('Error loading available trophies:', error);
+      setError('Failed to load available trophies from blockchain');
     }
   };
 
@@ -102,31 +137,13 @@ const TrophySystem = () => {
       setClaiming(prev => ({ ...prev, [courseId]: true }));
       setError(null);
 
-      // Create trophy data
-      const courseInfo = mockCourses[courseId];
-      const trophy = {
-        tokenId: Date.now().toString(),
-        courseId: courseId,
-        courseName: courseInfo.name,
-        dateClaimed: new Date().toISOString(),
-        userAddress: account,
-        metadata: {
-          name: `SkillPath Trophy - ${courseInfo.name}`,
-          description: `Awarded to ${account} for completing the ${courseInfo.name} course on SkillPath.`,
-          image: courseInfo.imageUri,
-          attributes: [
-            { trait_type: "Course ID", value: courseId.toString() },
-            { trait_type: "Date Claimed", value: new Date().toISOString() },
-            { trait_type: "Non-Transferable", value: "true" }
-          ]
-        }
-      };
-
-      // Save to localStorage
-      const claimedTrophies = localStorage.getItem(`skillpath_trophies_${account}`) || '[]';
-      const trophies = JSON.parse(claimedTrophies);
-      trophies.push(trophy);
-      localStorage.setItem(`skillpath_trophies_${account}`, JSON.stringify(trophies));
+      console.log('Claiming trophy for course ID:', courseId);
+      const tx = await contract.claimTrophy(courseId);
+      console.log('Transaction sent:', tx.hash);
+      
+      // Wait for transaction to be mined
+      const receipt = await tx.wait();
+      console.log('Transaction confirmed:', receipt);
 
       // Reload trophies after successful claim
       await loadUserTrophies();
@@ -135,7 +152,7 @@ const TrophySystem = () => {
       setClaiming(prev => ({ ...prev, [courseId]: false }));
     } catch (error) {
       console.error('Error claiming trophy:', error);
-      setError(error.message || 'Failed to claim trophy');
+      setError(error.message || 'Failed to claim trophy. Make sure you have enough gas and the course is completed.');
       setClaiming(prev => ({ ...prev, [courseId]: false }));
     }
   };
@@ -160,6 +177,23 @@ const TrophySystem = () => {
     );
   }
 
+  if (!contract) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">🔗</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Connecting to Blockchain</h2>
+          <p className="text-gray-600">Initializing trophy contract...</p>
+          {error && (
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800 text-sm">{error}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -168,8 +202,11 @@ const TrophySystem = () => {
           <div className="text-6xl mb-4">🏆</div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Your SkillPath Trophies</h1>
           <p className="text-xl text-gray-600">
-            Claim your achievements as unique, non-transferable NFTs
+            Claim your achievements as unique, non-transferable NFTs on the blockchain
           </p>
+          <div className="mt-4 text-sm text-gray-500">
+            Contract: {CONTRACT_ADDRESS.slice(0, 6)}...{CONTRACT_ADDRESS.slice(-4)}
+          </div>
         </div>
 
         {error && (
@@ -211,10 +248,10 @@ const TrophySystem = () => {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Claiming...
+                          Claiming NFT...
                         </span>
                       ) : (
-                        'Claim Trophy'
+                        'Claim NFT Trophy'
                       )}
                     </button>
                   </div>
@@ -227,7 +264,7 @@ const TrophySystem = () => {
         {/* User's Trophies */}
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Your Trophy Collection ({userTrophies.length})
+            Your NFT Trophy Collection ({userTrophies.length})
           </h2>
           
           {loading ? (
@@ -260,14 +297,19 @@ const TrophySystem = () => {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-600">Status:</span>
-                        <span className="text-green-600 font-semibold">Soulbound</span>
+                        <span className="text-green-600 font-semibold">Soulbound NFT</span>
                       </div>
                     </div>
-                                         <div className="mt-4 pt-4 border-t border-gray-200">
-                       <span className="text-green-600 text-sm font-medium">
-                         ✅ Trophy Claimed
-                       </span>
-                     </div>
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <a
+                        href={`https://polygonscan.com/token/${CONTRACT_ADDRESS}?a=${trophy.tokenId}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                      >
+                        View on PolygonScan →
+                      </a>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -275,9 +317,9 @@ const TrophySystem = () => {
           ) : (
             <div className="text-center py-12">
               <div className="text-6xl mb-4">📚</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No Trophies Yet</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">No NFT Trophies Yet</h3>
               <p className="text-gray-600">
-                Complete courses to earn your first trophy!
+                Complete courses to earn your first blockchain trophy!
               </p>
             </div>
           )}
