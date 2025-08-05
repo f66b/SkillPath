@@ -145,9 +145,7 @@ function App() {
               onGoToTrophies={goToTrophies}
             />
             <div className="pt-16">
-              <ProtectedRoute>
-                <TrophySystem />
-              </ProtectedRoute>
+              <TrophySystem />
             </div>
           </div>
         </ProgressProvider>

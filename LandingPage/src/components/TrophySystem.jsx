@@ -52,7 +52,7 @@ const TrophySystem = () => {
   const initializeContract = async () => {
     try {
       if (!provider) {
-        setError('Provider not available');
+        setError('Provider not available. Please connect your wallet.');
         return;
       }
       
@@ -70,7 +70,7 @@ const TrophySystem = () => {
         console.log('Contract connection successful. Total supply:', totalSupply.toString());
       } catch (testError) {
         console.error('Contract connection test failed:', testError);
-        setError('Contract address is invalid or network is not available. Please check your configuration.');
+        setError('Cannot connect to the trophy contract. Make sure you are connected to the local hardhat network (Chain ID: 31337) and the hardhat node is running.');
         return;
       }
       
@@ -78,7 +78,7 @@ const TrophySystem = () => {
       console.log('Contract initialized successfully:', contractInstance);
     } catch (error) {
       console.error('Error initializing contract:', error);
-      setError('Failed to connect to trophy contract. Make sure you have the correct contract address and network.');
+      setError('Failed to connect to trophy contract. Please check your wallet connection and network settings.');
     }
   };
 
@@ -199,17 +199,49 @@ const TrophySystem = () => {
 
   if (!account) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-6xl mb-4">🏆</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Connect Your Wallet</h2>
-          <p className="text-gray-600">Connect your wallet to view and claim your trophies</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="text-6xl mb-4">🏆</div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">SkillPath Trophy System</h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Claim your achievements as unique, non-transferable NFTs on the blockchain
+            </p>
+            
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 max-w-2xl mx-auto">
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">🔗 Connect Your Wallet</h3>
+              <p className="text-yellow-700 mb-4">
+                Connect your wallet to view and claim your trophies. You'll need to be connected to the local hardhat network.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="text-sm text-yellow-600">
+                  <strong>Network Settings:</strong>
+                  <ul className="mt-2 space-y-1">
+                    <li>• Network Name: Hardhat Local</li>
+                    <li>• RPC URL: http://127.0.0.1:8545</li>
+                    <li>• Chain ID: 31337</li>
+                    <li>• Currency: ETH</li>
+                  </ul>
+                </div>
+                
+                <div className="text-sm text-yellow-600">
+                  <strong>Test Account:</strong>
+                  <ul className="mt-2 space-y-1">
+                    <li>• Address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266</li>
+                    <li>• Private Key: 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
-  if (!contract) {
+  if (!contract && account) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
         <div className="text-center">
@@ -217,8 +249,16 @@ const TrophySystem = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Connecting to Blockchain</h2>
           <p className="text-gray-600">Initializing trophy contract...</p>
           {error && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg max-w-md mx-auto">
               <p className="text-red-800 text-sm">{error}</p>
+              <div className="mt-3 text-xs text-red-600">
+                <p><strong>To fix this:</strong></p>
+                <ul className="mt-1 space-y-1">
+                  <li>• Make sure hardhat node is running</li>
+                  <li>• Connect to network Chain ID: 31337</li>
+                  <li>• Check that the contract is deployed</li>
+                </ul>
+              </div>
             </div>
           )}
         </div>
