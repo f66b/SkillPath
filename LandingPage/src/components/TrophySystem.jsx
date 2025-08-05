@@ -129,6 +129,7 @@ const TrophySystem = () => {
           try {
             // Check if trophy already claimed on blockchain
             const hasClaimed = await contract.hasUserClaimed(courseIdMapping[courseId], account);
+            console.log(`Course ${courseId} claimed status:`, hasClaimed);
             
             if (!hasClaimed) {
               const courseInfo = await contract.courses(courseIdMapping[courseId]);
@@ -150,6 +151,8 @@ const TrophySystem = () => {
               imageUri: "https://ipfs.io/ipfs/QmYourTrophyImageHash1"
             });
           }
+        } else {
+          console.log(`Course ${courseId} not completed. Progress: ${courseProgress?.courseProgress || 0}%`);
         }
       }
       
@@ -236,6 +239,15 @@ const TrophySystem = () => {
           <div className="mt-4 text-sm text-gray-500">
             Contract: {CONTRACT_ADDRESS.slice(0, 6)}...{CONTRACT_ADDRESS.slice(-4)}
           </div>
+          <button
+            onClick={() => {
+              loadAvailableTrophies();
+              loadUserTrophies();
+            }}
+            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            🔄 Refresh Trophies
+          </button>
         </div>
 
         {/* Debug Panel - Only show in development */}
@@ -274,6 +286,20 @@ const TrophySystem = () => {
                     className="block w-full text-xs bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700"
                   >
                     Complete HTML/CSS
+                  </button>
+                  <button
+                    onClick={() => {
+                      simulateCourseCompletion(account, 'initiation');
+                      simulateCourseCompletion(account, 'pomodoro');
+                      simulateCourseCompletion(account, 'htmlcss');
+                      setTimeout(() => {
+                        loadAvailableTrophies();
+                        loadUserTrophies();
+                      }, 1000);
+                    }}
+                    className="block w-full text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700"
+                  >
+                    Complete ALL Courses
                   </button>
                 </div>
               </div>
