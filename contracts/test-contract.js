@@ -13,7 +13,7 @@ async function testContract() {
     // Contract ABI (minimal for testing)
     const abi = [
       "function totalSupply() external view returns (uint256)",
-      "function courses(uint256 courseId) external view returns (tuple(string name, string description, string imageUri, bool exists))"
+      "function courses(uint256 courseId) external view returns (string name, string description, string imageUri, bool exists)"
     ];
     
     // Create contract instance
